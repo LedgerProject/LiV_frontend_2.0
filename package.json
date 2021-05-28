@@ -6,7 +6,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "yarn lint",
-      "pre-push": "yarn rsc $npm_package_version"
+      "pre-push": "yarn rsc"
     }
   },
   "scripts": {
@@ -15,7 +15,7 @@
     "lint": "yarn lint:styles && yarn lint:scripts",
     "lint:styles": "stylelint \"src/**/*.{vue,css,scss}\" --syntax scss --max-warnings=0",
     "lint:scripts": "eslint \"{src,config}/**/*.{js,vue}\" --cache --fix --max-warnings=0",
-    "rsc": "node scripts/release-sanity-check.js",
+    "rsc": "node scripts/release-sanity-check.js  $npm_package_version",
     "analyze-bundle": "vue-cli-service build --mode bundle-analyzer"
   },
   "dependencies": {
