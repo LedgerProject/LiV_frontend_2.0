@@ -1,0 +1,14 @@
+{
+  "errors": {
+    "default": "Something bad happened. Please try again later or contact the system owner.",
+    "network": "Network error: { msg }"
+  },
+  "validation": {
+    "field-error_required": "Please fill out this field",
+    "field-error_minLength": "This field must contain minimum { minLength } symbols",
+    "field-error_maxLength": "This field must contain maximum { maxLength } symbols",
+    "field-error_alphaNum": "Value should consists of alphanumeric values (A-Z, a-z, 0-9)",
+    "field-error_fullName": "Please enter valid full name (A-Z, a-z, 0-9, . , ' \" -)",
+    "field-error_uniqueValue": "Value is not unique, please try another one"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@scss/*": ["src/scss/*"],
+      "@locales/*": ["src/i18n/resources/*"],
+      "@/vuex": ["src/vuex/*"],
+      "@/vue-router": ["src/vue-router/*"],
+      "@static/*": ["static/*"],
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

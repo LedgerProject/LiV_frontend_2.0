@@ -1,0 +1,104 @@
+@import './variables';
+@import '../../static/fonts/index.css';
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+
+  &:focus { outline: none; }
+}
+
+body,
+input,
+select,
+button,
+textarea {
+  background: transparent;
+  color: var(--col-primary);
+  font-family: 'Roboto', 'Noto Sans', '-apple-system', 'BlinkMacSystemFont', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.005rem;
+}
+
+textarea,
+button,
+select,
+input,
+body,
+span,
+p { font-size: 1.4rem; }
+
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  cursor: pointer;
+
+  background: transparent;
+
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+
+  /* Remove excess padding and border in Firefox 4+ */
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+
+body, p, li, ul { color: var(--col-text); }
+
+html {
+  font-size: 10px;
+  overflow: auto !important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--col-app-background);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100vh;
+
+  &,
+  & main { background-color: var(--col-app-background); }
+
+  & ul,
+  li { list-style-type: none; }
+}
+
+#nprogress {
+  z-index: 120;
+  top: 0;
+  width: 100%;
+  position: fixed;
+
+  .bar {
+    // !importants are for overwrite nprogress’ styles
+    background: var(--col-primary) !important;
+    height: 0.2rem !important;
+  }
+}
