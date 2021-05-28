@@ -2,12 +2,12 @@
 
 ## Project setup
 ```
-yarn install
+yarn
 ```
 
 ### Compiles and hot-reloads for development
 ```
-yarn serve
+yarn start
 ```
 
 ### Compiles and minifies for production
@@ -18,6 +18,16 @@ yarn build
 ### Lints and fixes files
 ```
 yarn lint
+```
+
+### Lints release version
+```
+yarn rsc
+```
+
+### Webpack analyze bundle tool
+```
+yarn analyze-bundle
 ```
 
 ### Customize configuration
