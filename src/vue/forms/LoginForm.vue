@@ -47,6 +47,7 @@
         :title="$t('sign-up')"
         class="auth-page__submit-button"
         :href="$config.SIGN_UP_REDIRECT_URL"
+        target="_self"
         :disabled="isFormDisabled"
       >
         {{ $t('sign-up') }}

@@ -6,6 +6,7 @@
     :aria-label="$attrs.title"
     class="app-button"
     :class="styleClassArray"
+    :href="href"
     :disabled="isDisabled"
     @click="onClick"
     ref="appButtonRef"
