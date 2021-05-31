@@ -1,6 +1,8 @@
 import AppContent from '@/AppContent'
 import Auth from '@/vue/pages/Auth'
 import Login from '@/vue/pages/Login'
+import WillRequests from '@/vue/pages/WillRequests'
+import WillRequestsList from '@/vue/pages/WillRequestsList'
 
 import { createRouter, createWebHistory } from 'vue-router'
 import { vueRoutes } from '@/vue-router/routes'
@@ -32,6 +34,23 @@ const routes = [
     name: vueRoutes.app.name,
     component: AppContent,
     beforeEnter: inAppRouteGuard,
+    children: [
+      {
+        path: '/will-requests',
+        name: vueRoutes.willRequests.name,
+        component: WillRequests,
+        redirect: vueRoutes.willRequestsList,
+        beforeEnter: inAppRouteGuard,
+        children: [
+          {
+            path: '/will-requests/list',
+            name: vueRoutes.willRequestsList.name,
+            component: WillRequestsList,
+            beforeEnter: inAppRouteGuard,
+          },
+        ],
+      },
+    ],
   },
 ]
 

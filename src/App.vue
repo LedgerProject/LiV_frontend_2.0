@@ -15,10 +15,32 @@
 <script>
 import StatusMessage from '@/vue/common/StatusMessage'
 
+import { ErrorHandler } from '@/js/helpers/error-handler'
+import { useStore } from 'vuex'
+import { vuexTypes } from '@/vuex'
+import { computed } from 'vue'
+
 export default {
   name: 'app',
 
   components: { StatusMessage },
+
+  setup () {
+    const store = useStore()
+    const isLoggedIn = computed(() => store.getters[vuexTypes.isLoggedIn])
+    const jwtToken = computed(() => store.getters[vuexTypes.jwtToken])
+    const loadAccount = () => store.actions[vuexTypes.loadAccount]
+
+    const initApp = async () => {
+      try {
+        if (isLoggedIn.value) await loadAccount(jwtToken)
+      } catch (e) {
+        ErrorHandler.process(e)
+      }
+    }
+
+    initApp()
+  },
 }
 </script>
 
