@@ -1,1 +1,57 @@
 @import '@static/branding/app-colors';
+
+/* https://material.io/guidelines/layout/responsive-ui.html#responsive-ui-breakpoints */
+$x-large: 1920px;
+$large: 1440px;
+$x-medium: 1200px;
+
+$media-desktop: 1130px;
+
+$medium: 1024px;
+$media-small-desktop: 960px;
+$tablet: 820px;
+
+$sidebar-hide-bp: 768px;
+
+$small: 600px;
+$x-small: 480px;
+
+$status-message-reposition-bp: 470px;
+
+$sidebar-width: 30.9rem;
+
+$_white: #ffffff;
+$_blueHaze: #d2d6e5;
+$_zirkon: #f5f7ff;
+$_lightRed: #ff4d00;
+
+// field variables
+$col-field-text: var(--col-field-txt);
+$col-field-icon: $col-field-text;
+$z-index-select-field-list: 5;
+$z-index-label: 2;
+$field-color-background: transparent;
+$field-color-text: $col-field-text;
+$field-color-text-disabled: var(--col-text-secondary);
+$field-carret-color: $col-field-text;
+$field-color-label: $col-field-text;
+$field-color-focused: var(--col-primary);
+$field-color-hover: var(--col-text-secondary);
+$field-color-unfocused: $_blueHaze;
+$field-color-disabled: $_zirkon;
+$field-color-error: $_lightRed;
+$field-border-radius: 0.6rem;
+$field-text-font-size: 1.4rem;
+$field-text-line-height: 2rem;
+$field-label-font-size: 1.2rem;
+$field-label-line-height: 1;
+$field-text-letter-spacing: 0.03rem;
+$field-error-font-size: 1.2rem;
+$field-error-line-height: 1.25;
+$field-transition-duration: 0.2s;
+$field-error-margin-top: 0.6rem;
+$field-input-padding-top: 1.5rem;
+$field-input-padding-bottom: 0.6rem;
+$field-input-padding: $field-input-padding-top 0 $field-input-padding-bottom 0;
+$field-label-color: $field-color-focused;
+$field-placeholder-color: var(--col-text-secondary);

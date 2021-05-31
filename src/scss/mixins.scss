@@ -1,0 +1,90 @@
+@import 'variables';
+
+@mixin respond-to($media) {
+  @if $media == xsmall {
+    @media only screen and (max-width: $x-small - 1px) {
+      @content;
+
+    }
+  }
+  @else if $media == small {
+    @media only screen and (max-width: $small - 1px) {
+      @content;
+    }
+  }
+  @else if $media == tablet {
+    @media only screen and (max-width: $tablet - 1px) {
+      @content;
+    }
+  }
+  @else if $media == medium {
+    @media only screen and (max-width: $medium) {
+      @content;
+    }
+  }
+  @else if $media == xmedium {
+    @media only screen and (max-width: $x-medium - 1px) {
+      @content;
+    }
+  }
+  @else if $media == large {
+    @media only screen and (max-width: $large - 1px) {
+      @content;
+    }
+  }
+  @else if $media == xlarge {
+    @media only screen and (max-width: $x-large - 1px) {
+      @content;
+    }
+  }
+  @else {
+    @media only screen and (max-width: $media) {
+      @content;
+    }
+  }
+}
+
+@mixin text-font-sizes {
+  font-size: $field-text-font-size;
+  line-height: $field-text-line-height;
+}
+
+@mixin label-font-sizes {
+  font-size: $field-label-font-size;
+  line-height: $field-label-line-height;
+}
+
+@mixin material-border($color-focused, $color-unfocused, $focused-selector:'') {
+  border-bottom: 0.1rem solid $color-unfocused;
+  background: radial-gradient($color-focused, $color-focused) bottom -0.1rem center no-repeat;
+  background-size: 0 0.2rem;
+  -webkit-transition-property: background-size, border-color;
+  -moz-transition-property: background-size, border-color;
+  -ms-transition-property: background-size, border-color;
+  -o-transition-property: background-size, border-color;
+  transition-property: background-size, border-color;
+  transition-duration: $field-transition-duration;
+
+  @if $focused-selector != '' {
+    #{$focused-selector},
+    &:focus {
+      background-size: 100% 0.2rem;
+    }
+  }
+
+  @else {
+    &:focus {
+      background-size: 100% 0.2rem;
+    }
+  }
+}
+
+@mixin readonly-material-border($color) {
+  border-bottom: 0.1rem dashed $color;
+  background: none;
+}
+
+@mixin placeholder {
+  color: $field-placeholder-color;
+  transition: opacity $field-transition-duration;
+}

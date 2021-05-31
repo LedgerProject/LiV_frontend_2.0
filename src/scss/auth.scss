@@ -1,0 +1,41 @@
+@import '~@/scss/mixins';
+
+.auth-page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.auth-page__title {
+  font-size: 4.8rem;
+  line-height: 5.6rem;
+  color: var(--col-page-heading);
+
+  @include respond-to(small) { font-size: 3.6rem; }
+}
+
+.auth-page__subtitle { 
+  margin-top: 1.6rem;
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  letter-spacing: 0.03rem;
+  color: var(--col-page-subheading);
+}
+
+.auth-page__form { margin-top: 4rem; }
+
+.auth-page__content {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--col-block-bg);
+  padding: 2.4rem;
+  border-radius: 1.6rem;
+  box-shadow: var(--col-block-shadow);
+
+  @include respond-to(small) { padding: 1.6; }
+}

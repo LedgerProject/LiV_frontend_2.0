@@ -69,6 +69,8 @@ module.exports = {
         '@locales': `${root}/i18n/resources`,
         '@/vuex': `${root}/vuex`,
         '@/vue-router': `${root}/vue-router`,
+        '@api': `${root}/api.js`,
+        '@validators': `${root}/validators.js`,
       },
     },
   },

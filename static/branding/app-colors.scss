@@ -1,16 +1,18 @@
 :root {
   --col-primary: #ff005a;
   --col-primary-rgb: 255, 0, 90;
-  --col-secondary: #000000;
+  --col-secondary: #0b1359;
   --col-secondary-rgb: 0, 0, 0;
   --col-block-bg: #ffffff;
   --col-block-bg-rgb: 255, 255, 255;
   --col-btn: var(--col-primary);
   --col-button-disabled: rgba(var(--col-primary-rgb), 0.7);
   --col-text: var(--col-secondary);
-  --col-text-secondary: var(--col-primary);
+  --col-text-secondary: #8990a5;
   --col-field-txt: var(--col-text);
-  --col-app-background: var(col-block-bg);
+  --col-app-background: #f8f9fa;
+  --col-page-heading: var(--col-text);
+  --col-page-subheading: var(--col-text-secondary);
   --col-btn-txt: #ffffff;
   --col-block-shadow: 
     0 0.3rem 0.5rem -0.1rem rgba(var(--col-secondary-rgb), 0.2),
