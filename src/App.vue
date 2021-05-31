@@ -8,11 +8,17 @@
       </div>
     </div>
   </div>
+
+  <status-message />
 </template>
 
 <script>
+import StatusMessage from '@/vue/common/StatusMessage'
+
 export default {
   name: 'app',
+
+  components: { StatusMessage },
 }
 </script>
 

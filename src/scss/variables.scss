@@ -20,12 +20,39 @@ $status-message-reposition-bp: 470px;
 
 $sidebar-width: 30.9rem;
 
+$content-padding-top: 2rem;
+$content-padding-bottom: 5.9rem;
+$content-padding-left: 8rem;
+$content-padding-right: 7.3rem;
+$content-side-paddings-sm: 2rem;
+
+// z indexes
+$z-status-message: 210;
+
 $_white: #ffffff;
 $_blueHaze: #d2d6e5;
 $_zirkon: #f5f7ff;
 $_lightRed: #ff4d00;
 $_alto: #e0e0e0;
 $_black: #ffffff;
+$_yellowGreen: #3cab00;
+$_orangePeel: #ffa333;
+
+// status colors:
+$col-warning: $_orangePeel;
+$col-success: $_yellowGreen;
+$col-error: $_lightRed;
+$col-info: $_white;
+
+// status message colors:
+$col-status-msg-warning: $col-warning;
+$col-status-msg-success: $col-success;
+$col-status-msg-error: $col-error;
+$col-status-msg-info: $col-info;
+$col-status-msg-bg: var(--col-block-bg);
+$col-status-msg-text: $_white;
+$col-status-msg-text-dark: var(--col-text);
+$col-status-close-btn-hover: rgba(0, 0, 0, 0.1);
 
 // field variables
 $col-field-text: var(--col-field-txt);
