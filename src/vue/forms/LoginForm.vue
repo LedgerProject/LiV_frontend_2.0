@@ -32,6 +32,26 @@
         />
       </div>
     </div>
+
+    <div class="app__form-actions">
+      <app-button
+        type="submit"
+        scheme="secondary"
+        class="auth-page__submit-button"
+        :title="$t('sign-in')"
+        :disabled="isFormDisabled"
+      >
+        {{ $t('sign-in') }}
+      </app-button>
+      <app-button
+        :title="$t('sign-up')"
+        class="auth-page__submit-button"
+        :href="$config.SIGN_UP_REDIRECT_URL"
+        :disabled="isFormDisabled"
+      >
+        {{ $t('sign-up') }}
+      </app-button>
+    </div>
   </form>
 </template>
 <script>
@@ -76,7 +96,7 @@ export default {
       try {
         await store.dispatch(vuexTypes.LOG_IN, {
           email: form.email.value,
-          password: form.email.password,
+          password: form.password.value,
         })
       } catch (e) {
         ErrorHandler.process(e)
@@ -91,13 +111,16 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/scss/app-form';
+@import '~@/scss/auth';
 </style>
 
 <i18n>
 {
   "en": {
     "email": "Email",
-    "password": "Password"
+    "password": "Password",
+    "sign-in": "Sign In",
+    "sign-up": "Sign Up"
   }
 }
 </i18n>

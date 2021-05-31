@@ -1,7 +1,8 @@
 {
   "errors": {
     "default": "Something bad happened. Please try again later or contact the system owner.",
-    "network": "Network error: { msg }"
+    "network": "Network error: { msg }",
+    "wrong-credentials": "Wrong email or password"
   },
   "validation": {
     "field-error_required": "Please fill out this field",

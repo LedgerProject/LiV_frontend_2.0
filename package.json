@@ -15,10 +15,11 @@
     "lint": "yarn lint:styles && yarn lint:scripts",
     "lint:styles": "stylelint \"src/**/*.{vue,css,scss}\" --syntax scss --max-warnings=0",
     "lint:scripts": "eslint \"{src,config}/**/*.{js,vue}\" --cache --fix --max-warnings=0",
-    "rsc": "node scripts/release-sanity-check.js  $npm_package_version",
+    "rsc": "node scripts/release-sanity-check.js",
     "analyze-bundle": "vue-cli-service build --mode bundle-analyzer"
   },
   "dependencies": {
+    "@mdi/font": "^5.9.55",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "husky": "2.4.0",

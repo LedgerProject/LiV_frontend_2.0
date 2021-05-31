@@ -1,4 +1,8 @@
 const mutations = {
+  // root
+  POP_STATE: 'POP_STATE',
+  CLEAR_STATE: 'CLEAR_STATE',
+
   // auth
   SET_JWT_TOKEN: 'SET_JWT_TOKEN',
 
@@ -7,6 +11,10 @@ const mutations = {
 }
 
 const actions = {
+  // root
+  LOG_IN: 'LOG_IN',
+  LOG_OUT: 'LOG_OUT',
+
   // auth
   LOAD_JWT_TOKEN: 'LOAD_JWT_TOKEN',
 

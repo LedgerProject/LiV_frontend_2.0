@@ -1,7 +1,10 @@
+$col-primary: #ff005a;
+$col-secondary: #0b1359;
+
 :root {
-  --col-primary: #ff005a;
+  --col-primary: #{$col-primary};
   --col-primary-rgb: 255, 0, 90;
-  --col-secondary: #0b1359;
+  --col-secondary: #{$col-secondary};
   --col-secondary-rgb: 0, 0, 0;
   --col-block-bg: #ffffff;
   --col-block-bg-rgb: 255, 255, 255;

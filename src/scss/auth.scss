@@ -39,3 +39,5 @@
 
   @include respond-to(small) { padding: 1.6; }
 }
+
+.auth-page__submit-button { max-width: 11rem; }

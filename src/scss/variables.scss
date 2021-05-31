@@ -24,6 +24,8 @@ $_white: #ffffff;
 $_blueHaze: #d2d6e5;
 $_zirkon: #f5f7ff;
 $_lightRed: #ff4d00;
+$_alto: #e0e0e0;
+$_black: #ffffff;
 
 // field variables
 $col-field-text: var(--col-field-txt);
@@ -55,3 +57,14 @@ $field-input-padding-bottom: 0.6rem;
 $field-input-padding: $field-input-padding-top 0 $field-input-padding-bottom 0;
 $field-label-color: $field-color-focused;
 $field-placeholder-color: var(--col-text-secondary);
+
+// app button
+$col-app-button-primary-text: $_white;
+$col-app-button-primary-bg: $col-primary;
+$col-app-button-primary-disabled-bg: lighten($col-app-button-primary-bg, 40%);
+$col-app-button-primary-hover-bg: lighten($col-app-button-primary-bg, 10%);
+
+$col-app-button-secondary-text: rgba($_black, 0.87);
+$col-app-button-secondary-bg: $_alto;
+$col-app-button-secondary-disabled-bg: lighten($col-app-button-secondary-bg, 8%);
+$col-app-button-secondary-hover-bg: darken($col-app-button-secondary-bg, 10%);
