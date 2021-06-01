@@ -32,6 +32,7 @@ const routes = [
   {
     path: '/',
     name: vueRoutes.app.name,
+    meta: { isNavigationRendered: true },
     component: AppContent,
     beforeEnter: inAppRouteGuard,
     children: [

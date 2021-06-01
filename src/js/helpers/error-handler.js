@@ -6,7 +6,7 @@ export class ErrorHandler {
   static process (error, translationId = '', errorTrackerConfig = {}) {
     const isFeedback = error.constructor === errors.UserFeedbackError
 
-    const mappedError = ErrorHandler.handleError(error)
+    const mappedError = ErrorHandler.mapError(error)
     const { messageArgs } = errorTrackerConfig
     const msgTrId =
       translationId || ErrorHandler._getTranslationId(mappedError)
