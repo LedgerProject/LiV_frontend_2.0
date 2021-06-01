@@ -6,14 +6,8 @@ export function useField (field) {
   const touched = ref(false)
   const errorMessage = ref('')
 
-  const setFieldErrorMessage = message => {
-    if (touched.value) {
-      if (message) {
-        errorMessage.value = message
-      } else {
-        errorMessage.value = ''
-      }
-    }
+  const setFieldErrorMessage = (message = '') => {
+    if (touched.value) { errorMessage.value = message }
   }
 
   const reAssign = val => {
