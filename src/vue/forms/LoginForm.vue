@@ -26,9 +26,9 @@
           name="login-password"
           autocomplete="current-password"
           :label="$t('password')"
-          :error-message="form.email.errorMessage"
+          :error-message="form.password.errorMessage"
           :disabled="isFormDisabled"
-          @blur="form.email.blur"
+          @blur="form.password.blur"
         />
       </div>
     </div>
@@ -57,8 +57,7 @@
 </template>
 <script>
 import { InputField } from '@/vue/fields'
-import { useForm } from '@/vue/composables'
-import { required, maxLength } from '@validators'
+import { useForm, useValidators } from '@/vue/composables'
 import { MAX_FIELD_LENGTH } from '@/js/const/field-length.const'
 import { ErrorHandler } from '@/js/helpers/error-handler'
 import { useStore } from 'vuex'
@@ -72,6 +71,8 @@ export default {
   setup () {
     const store = useStore()
 
+    const { required, maxLength } = useValidators()
+
     const { form, isFormDisabled, isFormValid, disableForm, enableForm } =
       useForm({
         email: {
@@ -80,7 +81,6 @@ export default {
             required,
             maxLength: maxLength(MAX_FIELD_LENGTH.email),
           },
-          validatorsArgs: { maxLength: MAX_FIELD_LENGTH.email },
         },
         password: {
           value: '',
@@ -88,7 +88,6 @@ export default {
             required,
             maxLength: maxLength(MAX_FIELD_LENGTH.password),
           },
-          validatorsArgs: { maxLength: MAX_FIELD_LENGTH.password },
         },
       })
 

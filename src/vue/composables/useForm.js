@@ -9,8 +9,6 @@ import { reactive, ref, computed } from 'vue'
  * @param {string|integer|boolean|array|object} init.fieldName.value - value
  * @param {Object} init.fieldName.validators - object with validators, like
  * required, minLength etc.
- * @param {Object} init.fieldName.validatorsArgs - object with values of
- * validators that will be used for error message localization
  * @returns {Object} form - reactive form object
  *
  * @example
@@ -22,10 +20,6 @@ import { reactive, ref, computed } from 'vue'
  *        maxLength: maxLength(MAX_FIELD_LENGTH.profileName),
  *        required,
  *        alphaNum,
- *      },
- *      validatorsArgs: {
- *        minLength: MIN_FIELD_LENGTH.profileName,
- *        maxLength: MAX_FIELD_LENGTH.profileName,
  *      },
  *    },
  * }

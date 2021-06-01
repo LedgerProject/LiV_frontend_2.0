@@ -2,7 +2,7 @@
   <div class="auth">
     <div class="auth__inner-wrapper">
       <div class="auth__logo">
-        <img :src="LOGO_IMAGE_URL" alt="logo">
+        <img src="/static/branding/logo.png" alt="logo">
       </div>
       <div class="auth__main">
         <router-view />
@@ -12,13 +12,7 @@
 </template>
 
 <script>
-const LOGO_IMAGE_URL = '/static/branding/logo.png'
-
-export default {
-  name: 'auth',
-
-  data: _ => ({ LOGO_IMAGE_URL }),
-}
+export default { name: 'auth' }
 </script>
 
 <style lang="scss" scoped>

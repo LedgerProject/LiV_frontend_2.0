@@ -12,14 +12,14 @@ const i18n = createI18n({
   fallbackLocale: locale,
   silentFallbackWarn: true,
   messages: {
-    ...require('./resources').default,
+    ...require('./resources.js').default,
   },
 })
 
 // Hot module replacement
 if (module.hot) {
-  module.hot.accept(['./resources'], function () {
-    const resources = require('./resources').default
+  module.hot.accept(['./resources.js'], function () {
+    const resources = require('./resources.js').default
 
     i18n.setLocaleMessage('en', resources.en)
   })
