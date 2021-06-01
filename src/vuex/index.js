@@ -1,14 +1,15 @@
 import { createStore } from 'vuex'
-import { vuexTypes } from '@/vuex'
+import { vuexTypes } from '@/vuex/types'
 import { sessionStoragePlugin } from '@/vuex/plugins/session-storage'
 
 import auth from '@/vuex/auth.module'
 import account from '@/vuex/account.module'
+import isEmpty from 'lodash/isEmpty'
 
 export const rootModule = {
   mutations: {
-    [vuexTypes.POP_STATE] () { },
-    [vuexTypes.CLEAR_STATE] () { },
+    [vuexTypes.POP_STATE] () {},
+    [vuexTypes.CLEAR_STATE] () {},
   },
   actions: {
     async [vuexTypes.LOG_OUT] ({ commit }) { commit(vuexTypes.CLEAR_STATE) },
@@ -18,7 +19,8 @@ export const rootModule = {
     },
   },
   getters: {
-    [vuexTypes.isLoggedIn]: (_, getters) => getters[vuexTypes.account],
+    [vuexTypes.isLoggedIn]: (_, getters) =>
+      !isEmpty(getters[vuexTypes.account]),
   },
 }
 
@@ -27,5 +29,7 @@ export const store = createStore({
   modules: { auth, account },
   plugins: [sessionStoragePlugin],
 })
+
+store.commit(vuexTypes.POP_STATE)
 
 export { vuexTypes } from './types'

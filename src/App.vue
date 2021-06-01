@@ -2,10 +2,10 @@
   <template v-if="isAppInitialised">
     <template v-if="isLoggedIn && isNavigationRendered">
       <div class="app__container">
+        <sidebar />
         <div class="app__main-content">
           <div class="app__navbar"/>
           <div class="app__main">
-            <div class="app__main-sidebar"/>
             <router-view v-slot="{ Component }">
               <transition
                 name="app-transition"
@@ -35,17 +35,19 @@
 
 <script>
 import StatusMessage from '@/vue/common/StatusMessage'
+import Sidebar from '@/vue/navigation/Sidebar'
 
 import { ErrorHandler } from '@/js/helpers/error-handler'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
-import { vuexTypes } from '@/vuex'
+import { vuexTypes } from '@/vuex/types'
 import { computed, ref } from 'vue'
+import { CONFIG } from '@/config'
 
 export default {
   name: 'app',
 
-  components: { StatusMessage },
+  components: { StatusMessage, Sidebar },
 
   setup () {
     const route = useRoute()
@@ -58,12 +60,13 @@ export default {
       () => route.matched.some(r => r.meta.isNavigationRendered),
     )
 
-    const loadAccount = () => store.actions[vuexTypes.loadAccount]
-
     const initApp = async () => {
       try {
-        if (isLoggedIn.value) await loadAccount(jwtToken)
+        if (isLoggedIn.value) {
+          await store.dispatch(vuexTypes.LOAD_ACCOUNT, jwtToken.value)
+        }
         isAppInitialised.value = true
+        document.title = CONFIG.APP_NAME
       } catch (e) {
         ErrorHandler.process(e)
       }
@@ -80,21 +83,21 @@ export default {
 .app__container {
   display: flex;
   align-items: stretch;
-  overflow-x: hidden;
+  overflow: hidden;
   flex: 1;
 }
 
 .app__main-content {
+  display: flex;
   flex: 1;
   overflow: hidden;
 }
 
 .app__main {
+  flex: 1;
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
 }
 
 .app-transition-enter-active {

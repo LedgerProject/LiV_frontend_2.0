@@ -3,7 +3,7 @@ const DURATION_DEFAULT = 500
 
 export const ripple = {
   beforeMount (el, binding) {
-    if (binding.value.isDisabled) return
+    if (binding?.value?.isDisabled) return
 
     el.onmousedown = function (e) {
       const target = this

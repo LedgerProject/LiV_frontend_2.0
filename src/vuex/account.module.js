@@ -3,7 +3,7 @@ import { api } from '@api'
 import { AccountRecord } from '@/js/records/account.record'
 import { USER_ROLES } from '@/js/const/user-roles.const'
 
-export const state = { account: null }
+export const state = { account: {} }
 
 export const mutations = {
   [vuexTypes.SET_ACCOUNT] (state, account) { state.account = account },
