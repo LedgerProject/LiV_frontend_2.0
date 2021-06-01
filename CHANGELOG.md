@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Please check our [developers guide](https://gitlab.com/tokend/developers-guide)
 for further information about branching and tagging conventions.
 
+## [Unreleased]
+#### Added
+- Validators
+- Input field
+- "Use-hooks" for form validation
+- Sign in page
+- Lodash
+- `AppButton` component
+- `StatusMessage` component
+
 ## [0.1.0-rc.1] - 2021-05-28
 #### Initial project release
 - Initiated project with vue cli

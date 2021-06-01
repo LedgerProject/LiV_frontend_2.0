@@ -6,12 +6,22 @@ export class ErrorHandler {
   static process (error, translationId = '', errorTrackerConfig = {}) {
     const isFeedback = error.constructor === errors.UserFeedbackError
 
+    const mappedError = ErrorHandler.handleError(error)
     const { messageArgs } = errorTrackerConfig
-    const msgTrId = translationId || ErrorHandler._getTranslationId(error)
+    const msgTrId =
+      translationId || ErrorHandler._getTranslationId(mappedError)
     if (!isFeedback) Bus.error({ messageId: msgTrId, messageArgs })
     errorTrackerConfig.translationId = msgTrId
     errorTrackerConfig.isFeedback = isFeedback
-    ErrorHandler.processWithoutFeedback(error, errorTrackerConfig)
+    ErrorHandler.processWithoutFeedback(mappedError, errorTrackerConfig)
+  }
+
+  static mapError (error) {
+    const errorData = error?.response?.data
+
+    return errorData === 'Invalid credentials'
+      ? new errors.WrongCredentialsError(error)
+      : error
   }
 
   static processWithoutFeedback (error, errorTrackerConfig = {}) {
@@ -26,6 +36,9 @@ export class ErrorHandler {
     switch (error.constructor) {
       case errors.NetworkError:
         translationId = 'errors.network'
+        break
+      case errors.WrongCredentialsError:
+        translationId = 'errors.wrong-credentials'
         break
       default:
         translationId = 'errors.default'

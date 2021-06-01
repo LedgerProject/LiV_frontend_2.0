@@ -1,8 +1,10 @@
-const COLOR_DEFAULT = 'rgba(255, 255, 255, .1)'
+const COLOR_DEFAULT = 'rgba(0, 0, 0, 0.5)'
 const DURATION_DEFAULT = 500
 
 export const ripple = {
   beforeMount (el, binding) {
+    if (binding.value.isDisabled) return
+
     el.onmousedown = function (e) {
       const target = this
       const rect = target.getBoundingClientRect()

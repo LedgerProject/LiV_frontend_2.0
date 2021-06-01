@@ -1,5 +1,6 @@
 @import './variables';
 @import '../../static/fonts/index.css';
+@import '../../node_modules/@mdi/font/css/materialdesignicons.min.css';
 
 * {
   box-sizing: border-box;
@@ -15,10 +16,10 @@ select,
 button,
 textarea {
   background: transparent;
-  color: var(--col-primary);
+  color: var(--col-text);
   font-family: 'Roboto', 'Noto Sans', '-apple-system', 'BlinkMacSystemFont', sans-serif;
   font-weight: 400;
-  letter-spacing: 0.005rem;
+  letter-spacing: 0.003rem;
 }
 
 textarea,

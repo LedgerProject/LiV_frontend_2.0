@@ -3,8 +3,11 @@ import '@/scss/app.scss'
 import App from '@/App.vue'
 import router from '@/vue-router'
 
+import AppButton from '@/vue/common/AppButton'
+
 import { store } from '@/vuex'
 import { vueRoutes } from '@/vue-router/routes'
+import { CONFIG } from '@/config'
 import { i18n } from '@/i18n'
 import { ripple } from '@/vue/directives/ripple'
 import { createApp, h, getCurrentInstance } from 'vue'
@@ -37,8 +40,11 @@ app
   .use(i18n)
 
 app.config.globalProperties.$routes = vueRoutes
+app.config.globalProperties.$config = CONFIG
 
 app.directive('ripple', ripple)
+
+app.component('AppButton', AppButton)
 
 app.config.errorHandler = error => { ErrorHandler.process(error) }
 
