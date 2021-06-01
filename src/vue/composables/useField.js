@@ -12,8 +12,9 @@ export function useField (field) {
 
   const reAssign = val => {
     isValid.value = true
-    Object.keys(field.validators ?? {}).forEach(validator => {
-      const validatorErrorMessage = field.validators[validator](val)
+    setFieldErrorMessage()
+    Object.keys(field.validators ?? {}).forEach(key => {
+      const validatorErrorMessage = field.validators[key](val)
 
       if (validatorErrorMessage) {
         isValid.value = false
@@ -28,7 +29,6 @@ export function useField (field) {
   }
 
   watch(value, reAssign)
-  watch(isValid, (value) => value && setFieldErrorMessage())
 
   reAssign(value.value)
 
