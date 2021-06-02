@@ -18,6 +18,7 @@ for further information about branching and tagging conventions.
 - `StatusMessage` component
 - `AppSidebar` component
 - `AppFooter` component
+- `AppHeader` component
 - `Logo` component
 - Will Requests route
 #### Fixed

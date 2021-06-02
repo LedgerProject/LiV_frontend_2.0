@@ -19,6 +19,7 @@ $x-small: 480px;
 $status-message-reposition-bp: 470px;
 
 $app-sidebar-width: 26rem;
+$app-sidebar-logo-height: 6.7rem;
 
 $content-padding-top: 2rem;
 $content-padding-bottom: 5.9rem;
@@ -42,6 +43,7 @@ $_black: #000000;
 $_yellowGreen: #3cab00;
 $_orangePeel: #ffa333;
 $_mercury: #e5e5e5;
+$_gallery : #eeeeee;
 
 // status colors:
 $col-warning: $_orangePeel;
@@ -121,3 +123,14 @@ $col-app-sidebar-burger-button-shadow:
 $col-app-footer-border: 0.1rem solid $_alto;
 $col-app-footer-background: var(--col-block-bg);
 $col-app-footer-text: var(--col-text);
+
+// app-header
+$col-app-header-border: 0.1rem solid $_alto;
+$col-app-header-background: var(--col-block-bg);
+$col-app-header-text: var(--col-text);
+$col-app-header-account-btn-hover: $_gallery;
+$col-app-header-dropdown: var(--col-block-bg);
+$col-app-header-dropdown-shadow: 
+  0 0.5rem 0.5rem -0.3rem rgba($_black, 0.2),
+  0 0.8rem 1rem 0.1rem rgba($_black, 0.14),
+  0 0.3rem 1.4rem 0.2rem rgba($_black, 0.12);

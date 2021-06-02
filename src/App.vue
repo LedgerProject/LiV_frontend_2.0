@@ -4,7 +4,7 @@
       <div class="app__container">
         <app-sidebar />
         <div class="app__main-content">
-          <div class="app__navbar"/>
+          <app-header />
           <div class="app__main">
             <router-view v-slot="{ Component }">
               <transition
@@ -38,18 +38,19 @@
 import StatusMessage from '@/vue/common/StatusMessage'
 import AppSidebar from '@/vue/navigation/AppSidebar'
 import AppFooter from '@/vue/navigation/AppFooter'
+import AppHeader from '@/vue/navigation/AppHeader'
 
 import { ErrorHandler } from '@/js/helpers/error-handler'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 import { vuexTypes } from '@/vuex/types'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { CONFIG } from '@/config'
 
 export default {
   name: 'app',
 
-  components: { StatusMessage, AppSidebar, AppFooter },
+  components: { StatusMessage, AppSidebar, AppFooter, AppHeader },
 
   setup () {
     const route = useRoute()
@@ -76,6 +77,13 @@ export default {
 
     initApp()
 
+    watch(isLoggedIn, newValue => {
+      if (!document.hasFocus() || !newValue) {
+        isAppInitialised.value = false
+        location.reload()
+      }
+    })
+
     return { isAppInitialised, isNavigationRendered, isLoggedIn }
   },
 }
@@ -99,7 +107,7 @@ export default {
 
 .app__main {
   width: 100%;
-  height: 100%;
+  min-height: 87.5vh;
   display: flex;
   flex-direction: column;
   align-items: stretch;

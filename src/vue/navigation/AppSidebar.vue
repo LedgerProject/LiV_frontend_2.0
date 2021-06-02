@@ -9,6 +9,8 @@
     <button
       class="app-sidebar__burger-btn"
       :class="{ 'app-sidebar__burger-btn--sidebar-active': isOpened }"
+      :title="$t('burger-menu')"
+      :aria-label="$t('burger-menu')"
       @click="openSidebar"
     >
       <i class="mdi mdi-menu app-sidebar__burger-btn-icon" />
@@ -94,18 +96,18 @@ export default {
     opacity: 0;
     transition: opacity 0.15s $col-app-sidebar-backdrop-animation;
   }
-}
 
-.app-sidebar__backdrop--active {
-  left: $app-sidebar-width;
-  opacity: 1;
-  transition: opacity 0.25s $col-app-sidebar-backdrop-animation 0.1s;
+  &--active {
+    left: $app-sidebar-width;
+    opacity: 1;
+    transition: opacity 0.25s $col-app-sidebar-backdrop-animation 0.1s;
+  }
 }
 
 .app-sidebar__burger-btn {
   position: absolute;
   left: 0.5rem;
-  top: 1rem;
+  top: 1.3rem;
   z-index: $z-app-sidebar-burger;
   width: 4rem;
   height: 4rem;
@@ -166,6 +168,7 @@ export default {
 .app-sidebar__logo-section {
   padding: 0.8rem 1.6rem;
   border-bottom: $col-app-sidebar-border;
+  height: $app-sidebar-logo-height;
 
   @include respond-to($sidebar-hide-bp) {
     .app-sidebar__aside--closed & { display: none; }
@@ -240,7 +243,8 @@ export default {
 <i18n>
 {
   "en": {
-    "will-requests-link": "Will Requests"
+    "will-requests-link": "Will Requests",
+    "burger-menu": "Burger menu"
   }
 }
 </i18n>

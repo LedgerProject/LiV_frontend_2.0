@@ -1,7 +1,29 @@
-@import './variables';
+@import '~@/scss/variables';
 @import '../../static/fonts/index.css';
 @import '../../node_modules/@mdi/font/css/materialdesignicons.min.css';
 @import '../../node_modules/nprogress/nprogress.css';
+
+:root {
+  --col-primary: #{$col-primary};
+  --col-primary-rgb: 255, 0, 90;
+  --col-secondary: #{$col-secondary};
+  --col-secondary-rgb: 0, 0, 0;
+  --col-block-bg: #ffffff;
+  --col-block-bg-rgb: 255, 255, 255;
+  --col-btn: var(--col-primary);
+  --col-button-disabled: rgba(var(--col-primary-rgb), 0.7);
+  --col-text: var(--col-secondary);
+  --col-text-secondary: #8990a5;
+  --col-field-txt: var(--col-text);
+  --col-app-background: #f8f9fa;
+  --col-page-heading: var(--col-text);
+  --col-page-subheading: var(--col-text-secondary);
+  --col-btn-txt: #ffffff;
+  --col-block-shadow: 
+    0 0.3rem 0.5rem -0.1rem rgba(var(--col-secondary-rgb), 0.2),
+    0 0.6rem 1rem 0 rgba(var(--col-secondary-rgb), 0.14),
+    0 0.1rem 1.8rem 0 rgba(var(--col-secondary-rgb), 0.12);
+}
 
 * {
   box-sizing: border-box;

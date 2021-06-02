@@ -26,19 +26,19 @@ export const actions = {
   },
 }
 export const getters = {
-  [vuexTypes.account]: state => state.account,
+  [vuexTypes.account]: state => state?.account,
 
   [vuexTypes.isAccountGeneral]: (_, getters) =>
-    +getters[vuexTypes.account].role === USER_ROLES.general,
+    +getters[vuexTypes.account]?.role === USER_ROLES.general,
 
   [vuexTypes.isAccountNotary]: (_, getters) =>
-    +getters[vuexTypes.account].role === USER_ROLES.notary,
+    +getters[vuexTypes.account]?.role === USER_ROLES.notary,
 
   [vuexTypes.isAccountRegistry]: (_, getters) =>
-    +getters[vuexTypes.account].role === USER_ROLES.registry,
+    +getters[vuexTypes.account]?.role === USER_ROLES.registry,
 
   [vuexTypes.isKycExist]: (_, getters) =>
-    getters[vuexTypes.account].isKycExist,
+    getters[vuexTypes.account]?.isKycExist,
 }
 
 export default {

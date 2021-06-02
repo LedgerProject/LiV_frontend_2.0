@@ -1,6 +1,7 @@
 import AppContent from '@/AppContent'
 import Auth from '@/vue/pages/Auth'
 import Login from '@/vue/pages/Login'
+import Profile from '@/vue/pages/Profile'
 import WillRequests from '@/vue/pages/WillRequests'
 import WillRequestsList from '@/vue/pages/WillRequestsList'
 
@@ -51,6 +52,12 @@ const routes = [
             beforeEnter: inAppRouteGuard,
           },
         ],
+      },
+      {
+        path: '/profile',
+        name: vueRoutes.profile.name,
+        beforeEnter: inAppRouteGuard,
+        component: Profile,
       },
     ],
   },

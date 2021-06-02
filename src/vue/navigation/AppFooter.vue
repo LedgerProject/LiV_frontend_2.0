@@ -20,13 +20,9 @@
 import { computed } from 'vue'
 
 export default {
-  name: 'footer',
+  name: 'app-footer',
 
-  setup () {
-    const currentYear = computed(() => new Date().getFullYear())
-
-    return { currentYear }
-  },
+  setup () { return { currentYear: computed(() => new Date().getFullYear()) } },
 }
 </script>
 
