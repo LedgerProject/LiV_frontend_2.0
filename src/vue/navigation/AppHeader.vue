@@ -61,8 +61,7 @@ export default {
     const closeDropdown = () => { isDropdownShown.value = false }
 
     const openDropdown = event => {
-      const buttonElement = event.target
-      buttonElement.blur()
+      event.target.blur()
       isDropdownShown.value = true
     }
 
