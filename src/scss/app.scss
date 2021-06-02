@@ -1,6 +1,7 @@
 @import './variables';
 @import '../../static/fonts/index.css';
 @import '../../node_modules/@mdi/font/css/materialdesignicons.min.css';
+@import '../../node_modules/nprogress/nprogress.css';
 
 * {
   box-sizing: border-box;
@@ -15,7 +16,7 @@ input,
 select,
 button,
 textarea {
-  background: transparent;
+  background-color: var(--col-app-background);
   color: var(--col-text);
   font-family: 'Roboto', 'Noto Sans', '-apple-system', 'BlinkMacSystemFont', sans-serif;
   font-weight: 400;
@@ -66,10 +67,10 @@ body, p, li, ul { color: var(--col-text); }
 html {
   font-size: 10px;
   overflow: auto !important;
+  -webkit-overflow-scrolling: touch !important;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--col-app-background);
 }
 
 body {

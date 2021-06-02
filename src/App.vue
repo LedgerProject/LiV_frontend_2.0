@@ -2,7 +2,7 @@
   <template v-if="isAppInitialised">
     <template v-if="isLoggedIn && isNavigationRendered">
       <div class="app__container">
-        <sidebar />
+        <app-sidebar />
         <div class="app__main-content">
           <div class="app__navbar"/>
           <div class="app__main">
@@ -15,6 +15,7 @@
               </transition>
             </router-view>
           </div>
+          <app-footer />
         </div>
       </div>
     </template>
@@ -35,7 +36,8 @@
 
 <script>
 import StatusMessage from '@/vue/common/StatusMessage'
-import Sidebar from '@/vue/navigation/Sidebar'
+import AppSidebar from '@/vue/navigation/AppSidebar'
+import AppFooter from '@/vue/navigation/AppFooter'
 
 import { ErrorHandler } from '@/js/helpers/error-handler'
 import { useStore } from 'vuex'
@@ -47,7 +49,7 @@ import { CONFIG } from '@/config'
 export default {
   name: 'app',
 
-  components: { StatusMessage, Sidebar },
+  components: { StatusMessage, AppSidebar, AppFooter },
 
   setup () {
     const route = useRoute()
@@ -80,6 +82,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/scss/variables';
+@import '~@/scss/mixins';
+
 .app__container {
   display: flex;
   align-items: stretch;
@@ -88,16 +93,18 @@ export default {
 }
 
 .app__main-content {
-  display: flex;
   flex: 1;
-  overflow: hidden;
+  overflow: hidden auto;
 }
 
 .app__main {
-  flex: 1;
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  @include respond-to($sidebar-hide-bp) { width: 100vw; }
 }
 
 .app-transition-enter-active {
