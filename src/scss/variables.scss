@@ -11,14 +11,15 @@ $medium: 1024px;
 $media-small-desktop: 960px;
 $tablet: 820px;
 
-$sidebar-hide-bp: 768px;
+$sidebar-hide-bp: 1280px;
 
 $small: 600px;
 $x-small: 480px;
 
 $status-message-reposition-bp: 470px;
 
-$sidebar-width: 30.9rem;
+$app-sidebar-width: 26rem;
+$app-sidebar-logo-height: 6.7rem;
 
 $content-padding-top: 2rem;
 $content-padding-bottom: 5.9rem;
@@ -28,15 +29,21 @@ $content-side-paddings-sm: 2rem;
 
 // z indexes
 $z-status-message: 210;
+$z-app-sidebar-burger: 10;
+$z-app-sidebar-backdrop: 115;
+$z-app-sidebar: 120;
 
 $_white: #ffffff;
+$_wildSand: #f5f5f5;
 $_blueHaze: #d2d6e5;
 $_zirkon: #f5f7ff;
 $_lightRed: #ff4d00;
 $_alto: #e0e0e0;
-$_black: #ffffff;
+$_black: #000000;
 $_yellowGreen: #3cab00;
 $_orangePeel: #ffa333;
+$_mercury: #e5e5e5;
+$_gallery : #eeeeee;
 
 // status colors:
 $col-warning: $_orangePeel;
@@ -95,3 +102,35 @@ $col-app-button-secondary-text: rgba($_black, 0.87);
 $col-app-button-secondary-bg: $_alto;
 $col-app-button-secondary-disabled-bg: lighten($col-app-button-secondary-bg, 8%);
 $col-app-button-secondary-hover-bg: darken($col-app-button-secondary-bg, 10%);
+
+
+// app-sidebar
+$col-app-sidebar-background: var(--col-block-bg);
+$col-app-sidebar-border: 0.1rem solid $_alto;
+$col-app-sidebar-backdrop: rgba($_black, 0.46);
+$col-app-sidebar-backdrop-animation: cubic-bezier(0.4, 0, 0.2, 1);
+$col-app-sidebar-text: var(--col-text);
+$col-app-sidebar-active-elem-background: $_mercury;
+$col-app-sidebar-burger-button: $_wildSand;
+$col-app-sidebar-burger-icon-color: rgba($_black, 0.87);
+$col-app-sidebar-burger-button-shadow: 
+  0 0.2rem 0.1rem -0.1rem rgba($_black, 0.2),
+  0 0.1rem 0.1rem 0 rgba($_black, 0.14),
+  0 0.1rem 0.3rem 0 rgba($_black, 0.12);
+
+
+// app-footer
+$col-app-footer-border: 0.1rem solid $_alto;
+$col-app-footer-background: var(--col-block-bg);
+$col-app-footer-text: var(--col-text);
+
+// app-header
+$col-app-header-border: 0.1rem solid $_alto;
+$col-app-header-background: var(--col-block-bg);
+$col-app-header-text: var(--col-text);
+$col-app-header-account-btn-hover: $_gallery;
+$col-app-header-dropdown: var(--col-block-bg);
+$col-app-header-dropdown-shadow: 
+  0 0.5rem 0.5rem -0.3rem rgba($_black, 0.2),
+  0 0.8rem 1rem 0.1rem rgba($_black, 0.14),
+  0 0.3rem 1.4rem 0.2rem rgba($_black, 0.12);

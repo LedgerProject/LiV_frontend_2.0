@@ -7,7 +7,10 @@
       <p class="auth-page__subtitle">
         {{ $t('sign-in-subtitle') }}
       </p>
-      <login-form class="auth-page__form" />
+      <login-form
+        class="auth-page__form"
+        @submit="$router.push($routes.willRequests)"
+      />
     </div>
   </div>
 </template>

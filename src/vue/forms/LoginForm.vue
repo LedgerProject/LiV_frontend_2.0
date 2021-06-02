@@ -68,7 +68,9 @@ export default {
 
   components: { InputField },
 
-  setup () {
+  emits: ['submit'],
+
+  setup (props, { emit }) {
     const store = useStore()
 
     const { required, maxLength } = useValidators()
@@ -98,6 +100,7 @@ export default {
           email: form.email.value,
           password: form.password.value,
         })
+        emit('submit')
       } catch (e) {
         ErrorHandler.process(e)
       }

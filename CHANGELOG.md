@@ -16,6 +16,13 @@ for further information about branching and tagging conventions.
 - Lodash
 - `AppButton` component
 - `StatusMessage` component
+- `AppSidebar` component
+- `AppFooter` component
+- `AppHeader` component
+- `Logo` component
+- Will Requests route
+#### Fixed
+- Restoring store from localStorage
 
 ## [0.1.0-rc.1] - 2021-05-28
 #### Initial project release

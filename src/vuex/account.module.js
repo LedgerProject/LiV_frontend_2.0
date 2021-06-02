@@ -3,7 +3,7 @@ import { api } from '@api'
 import { AccountRecord } from '@/js/records/account.record'
 import { USER_ROLES } from '@/js/const/user-roles.const'
 
-export const state = { account: null }
+export const state = { account: {} }
 
 export const mutations = {
   [vuexTypes.SET_ACCOUNT] (state, account) { state.account = account },
@@ -26,19 +26,19 @@ export const actions = {
   },
 }
 export const getters = {
-  [vuexTypes.account]: state => state.account,
+  [vuexTypes.account]: state => state?.account,
 
   [vuexTypes.isAccountGeneral]: (_, getters) =>
-    +getters[vuexTypes.account].role === USER_ROLES.general,
+    +getters[vuexTypes.account]?.role === USER_ROLES.general,
 
   [vuexTypes.isAccountNotary]: (_, getters) =>
-    +getters[vuexTypes.account].role === USER_ROLES.notary,
+    +getters[vuexTypes.account]?.role === USER_ROLES.notary,
 
   [vuexTypes.isAccountRegistry]: (_, getters) =>
-    +getters[vuexTypes.account].role === USER_ROLES.registry,
+    +getters[vuexTypes.account]?.role === USER_ROLES.registry,
 
   [vuexTypes.isKycExist]: (_, getters) =>
-    getters[vuexTypes.account].isKycExist,
+    getters[vuexTypes.account]?.isKycExist,
 }
 
 export default {

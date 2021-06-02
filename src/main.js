@@ -14,6 +14,8 @@ import { createApp, h, getCurrentInstance } from 'vue'
 import { useFormatDate } from '@/vue/composables'
 import { ErrorHandler } from '@/js/helpers/error-handler'
 
+import VueClickAway from 'vue3-click-away'
+
 const app = createApp({
   setup () {
     const app = getCurrentInstance()
@@ -38,6 +40,7 @@ app
   .use(store)
   .use(router)
   .use(i18n)
+  .use(VueClickAway)
 
 app.config.globalProperties.$routes = vueRoutes
 app.config.globalProperties.$config = CONFIG

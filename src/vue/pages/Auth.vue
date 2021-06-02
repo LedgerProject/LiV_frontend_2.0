@@ -41,7 +41,7 @@ export default { name: 'auth' }
     & > .auth__logo { display: none; }
   }
   @include respond-to(medium) { padding: 8rem 10rem; }
-  @include respond-to($sidebar-hide-bp) { padding: 8rem 5rem; }
+  @include respond-to($tablet) { padding: 8rem 5rem; }
   @include respond-to(small) { padding: 5rem 2rem; }
 }
 
