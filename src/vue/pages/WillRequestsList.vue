@@ -1,11 +1,83 @@
 <template>
-  <div class="will-requests-list">
-    <!--  -->
+  <div class="app__page-content will-requests-list">
+    <template v-if="isLoading">
+      <loader
+        :message="$t('loading-message')"
+        position-center
+      />
+    </template>
+    <template v-else>
+      <template v-if="isLoadFailed">
+        <loading-error-message />
+      </template>
+      <template v-else>
+        <template v-if="willRequests.length">
+          <!-- if something loaded -->
+        </template>
+        <template v-else>
+          <no-data-message
+            :title="$t('no-data-title')"
+            :message="$t('no-data-message')"
+            center
+          />
+        </template>
+      </template>
+    </template>
   </div>
 </template>
 
 <script>
+import Loader from '@/vue/common/Loader'
+import LoadingErrorMessage from '@/vue/common/LoadingErrorMessage'
+import NoDataMessage from '@/vue/common/NoDataMessage'
+
+import { api } from '@/api'
+import { ref, reactive } from 'vue'
+import { ErrorHandler } from '@/js/helpers/error-handler'
+import { WillRequestRecord } from '@/js/records/will-request.record'
+
 export default {
   name: 'will-requests-list',
+
+  components: { Loader, LoadingErrorMessage, NoDataMessage },
+
+  setup () {
+    const isLoading = ref(false)
+    const isLoadFailed = ref(false)
+    const willRequests = reactive([])
+
+    const loadWillRequestsList = async () => {
+      isLoading.value = ref(true)
+      isLoadFailed.value = ref(false)
+      try {
+        const { data } = await api.get('/will-requests/', {
+        })
+        willRequests.value = data.map(el => new WillRequestRecord(el))
+      } catch (e) {
+        isLoadFailed.value = true
+        ErrorHandler.process(e)
+      }
+      isLoading.value = ref(false)
+    }
+
+    loadWillRequestsList()
+
+    return {
+      isLoading,
+      isLoadFailed,
+      willRequests,
+    }
+  },
+
 }
 </script>
+
+<i18n>
+{
+  "en": {
+    "loading-message": "Loading will requests list...",
+    "no-data-title": "No data",
+    "no-data-message": "There is no will requests"
+  }
+}
+</i18n>
