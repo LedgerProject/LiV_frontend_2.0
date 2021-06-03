@@ -128,3 +128,64 @@ body {
 }
 
 .app__page-content { padding: 3rem 2rem; }
+
+.app__table {
+  overflow-x: auto;
+  border-radius: 0.4rem;
+  padding: 2.8rem;
+  background-color: $col-table-background;
+
+  &--with-shadow { box-shadow: $col-table-shadow; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+      border-bottom: 0.1rem solid $col-table-border;
+
+      th {
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-align: left;
+        height: 4.8rem;
+        padding: 0 1.6rem;
+        overflow: hidden;
+        max-width: 12rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: $col-table-head-text;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 0.1rem solid $col-table-border;
+        transition: background-color 0.1s ease-in-out;
+
+        &:not([disabled]):hover { background-color: $col-table-row-selected; }
+
+        &[disabled] { background-color: $col-table-row-disabled; }
+
+        td {
+          font-size: 1.4rem;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          max-width: 12rem;
+          white-space: nowrap;
+          color: $col-table-cell-text;
+          height: 4.8rem;
+          padding: 0 1.6rem;
+        }
+      }
+    }
+  }
+
+  &.app__table--clickable-rows tbody tr { cursor: pointer; }
+
+  &--last-td-to-right {
+    & > table > tbody > tr > td:not(:only-of-type):last-of-type {
+      text-align: right;
+    }
+  }
+}

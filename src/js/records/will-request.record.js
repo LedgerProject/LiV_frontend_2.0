@@ -1,4 +1,4 @@
-import { WILL_REQUEST_STATES } from '@/js/const/will-statuses.const'
+import { WILL_REQUEST_STATES } from '@/js/const/will-request-states.const'
 import { AccountRecord } from '@/js/records/account.record'
 
 export class WillRequestRecord {

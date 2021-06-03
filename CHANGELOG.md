@@ -22,7 +22,7 @@ for further information about branching and tagging conventions.
 - `Logo` component
 - `Modal` component
 - Profile page and kyc form
-- Will Requests route
+- Will Requests flows
 #### Fixed
 - Restoring store from localStorage
 

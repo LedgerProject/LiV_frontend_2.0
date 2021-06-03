@@ -8,11 +8,11 @@
     </template>
     <template v-else>
       <template v-if="isLoadFailed">
-        <loading-error-message />
+        <loading-error-message position-center />
       </template>
       <template v-else>
         <template v-if="willRequests.length">
-          <!-- if something loaded -->
+          <will-requests-table :will-requests="willRequests"/>
         </template>
         <template v-else>
           <no-data-message
@@ -30,25 +30,26 @@
 import Loader from '@/vue/common/Loader'
 import LoadingErrorMessage from '@/vue/common/LoadingErrorMessage'
 import NoDataMessage from '@/vue/common/NoDataMessage'
+import WillRequestsTable from '@/vue/pages/WillRequests/WillRequestsTable'
 
 import { api } from '@/api'
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import { ErrorHandler } from '@/js/helpers/error-handler'
 import { WillRequestRecord } from '@/js/records/will-request.record'
 
 export default {
   name: 'will-requests-list',
 
-  components: { Loader, LoadingErrorMessage, NoDataMessage },
+  components: { Loader, LoadingErrorMessage, NoDataMessage, WillRequestsTable },
 
   setup () {
     const isLoading = ref(false)
     const isLoadFailed = ref(false)
-    const willRequests = reactive([])
+    const willRequests = ref([])
 
     const loadWillRequestsList = async () => {
-      isLoading.value = ref(true)
-      isLoadFailed.value = ref(false)
+      isLoading.value = true
+      isLoadFailed.value = false
       try {
         const { data } = await api.get('/will-requests/', {
         })
@@ -57,7 +58,7 @@ export default {
         isLoadFailed.value = true
         ErrorHandler.process(e)
       }
-      isLoading.value = ref(false)
+      isLoading.value = false
     }
 
     loadWillRequestsList()

@@ -48,6 +48,9 @@ $_yellowGreen: #3cab00;
 $_orangePeel: #ffa333;
 $_mercury: #e5e5e5;
 $_gallery : #eeeeee;
+$_whiteSmoke: #f5f6f9;
+$_lightPurple: #837fa1;
+$_grayishBlue: #252733;
 
 // status colors:
 $col-warning: $_orangePeel;
@@ -158,9 +161,22 @@ $col-no-data-message-text: var(--col-text);
 // modal
 $col-modal-backdrop-bg: rgba($_black, 0.2);
 $col-modal-btn-text: var(--col-primary);
-$col-modal-head-text: var(--col-primary);;
+$col-modal-head-text: var(--col-primary);
 $col-modal-btn-color-hover-bg: rgba($col-primary, 0.2);
 $col-modal-btn-color-active: darken($col-primary, 5%);
 $col-modal-bg: var(--col-block-bg);
 $col-modal-head-bg: $col-modal-bg;
 $col-modal-head-text: $col-modal-head-text;
+
+// table colors:
+$col-table-background: var(--col-block-bg);
+$col-table-border: $_alto;
+$col-table-cell-text: var(--col-text);
+$col-table-cell-text-inactive: $_lightPurple;
+$col-table-head-text: var(--col-primary);
+$col-table-row-selected: $_gallery;
+$col-table-row-disabled: $_alto;
+$col-table-shadow: 
+  0 0.3rem 0.1rem -0.2rem rgba($_black, 0.2),
+  0 0.2rem 0.2rem 0 rgba($_black, 0.14),
+  0 0.1rem 0.5rem 0 rgba($_black, 0.12);

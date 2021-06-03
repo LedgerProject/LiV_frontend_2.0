@@ -11,7 +11,11 @@ import { CONFIG } from '@/config'
 import { i18n } from '@/i18n'
 import { ripple } from '@/vue/directives/ripple'
 import { createApp, h, getCurrentInstance } from 'vue'
-import { useFormatDate, useGlobalizeUserRole } from '@/vue/composables'
+import {
+  useFormatDate,
+  useGlobalizeUserRole,
+  useGlobalizeWillRequestStatus,
+} from '@/vue/composables'
 import { ErrorHandler } from '@/js/helpers/error-handler'
 
 import VueClickAway from 'vue3-click-away'
@@ -30,6 +34,7 @@ const app = createApp({
     } = useFormatDate()
 
     const { globalizeUserRole } = useGlobalizeUserRole()
+    const { globalizeWillRequestStatus } = useGlobalizeWillRequestStatus()
 
     /* eslint-disable max-len */
     app.appContext.config.globalProperties.$fd = formatDate
@@ -38,6 +43,7 @@ const app = createApp({
     app.appContext.config.globalProperties.$fcalend = formatCalendar
     app.appContext.config.globalProperties.$fcalendi = formatCalendarInline
     app.appContext.config.globalProperties.$globalizeUserRole = globalizeUserRole
+    app.appContext.config.globalProperties.$globalizeWillRequestStatus = globalizeWillRequestStatus
     /* eslint-enable max-len */
   },
   render: () => h(App),

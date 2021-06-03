@@ -5,6 +5,15 @@
       "registry": "Registry",
       "notary": "Notary",
       "unknown": "Unknown"
+    },
+    "will-request-statuses": {
+      "approved": "Approved",
+      "deleted": "Deleted",
+      "rejected": "Rejected",
+      "submitted": "Submitted",
+      "notified": "Notified",
+      "released": "Released",
+      "unknown": "Unknown"
     }
   },
   "notifications": {
