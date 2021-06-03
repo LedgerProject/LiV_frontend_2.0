@@ -33,6 +33,9 @@ $z-status-message: 210;
 $z-app-sidebar-burger: 10;
 $z-app-sidebar-backdrop: 115;
 $z-app-sidebar: 120;
+$z-modal: 160;
+$z-modal-backdrop: -1;
+$z-modal-pane: 165;
 
 $_white: #ffffff;
 $_wildSand: #f5f5f5;
@@ -119,7 +122,6 @@ $col-app-sidebar-burger-button-shadow:
   0 0.1rem 0.1rem 0 rgba($_black, 0.14),
   0 0.1rem 0.3rem 0 rgba($_black, 0.12);
 
-
 // app footer
 $col-app-footer-border: 0.1rem solid $_alto;
 $col-app-footer-background: var(--col-block-bg);
@@ -146,10 +148,19 @@ $col-profile-subtitle-text: var(--col-text-secondary);
 $col-profile-viewer-shadow: var(--col-block-shadow);
 $col-profile-viewer: var(--col-block-bg);
 
-
 // loader
 $col-loader-text: var(--col-text);
 $col-loader-icon: var(--col-primary);
 
 // no data message colors:
 $col-no-data-message-text: var(--col-text);
+
+// modal
+$col-modal-backdrop-bg: rgba($_black, 0.2);
+$col-modal-btn-text: var(--col-primary);
+$col-modal-head-text: var(--col-primary);;
+$col-modal-btn-color-hover-bg: rgba($col-primary, 0.2);
+$col-modal-btn-color-active: darken($col-primary, 5%);
+$col-modal-bg: var(--col-block-bg);
+$col-modal-head-bg: $col-modal-bg;
+$col-modal-head-text: $col-modal-head-text;
