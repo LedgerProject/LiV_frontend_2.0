@@ -168,7 +168,7 @@ export default {
 .app-sidebar__logo-section {
   padding: 0.8rem 1.6rem;
   border-bottom: $col-app-sidebar-border;
-  height: $app-sidebar-logo-height;
+  height: $app-header-height;
 
   @include respond-to($sidebar-hide-bp) {
     .app-sidebar__aside--closed & { display: none; }

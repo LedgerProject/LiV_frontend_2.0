@@ -102,15 +102,16 @@ export default {
 
 .app__main-content {
   flex: 1;
-  overflow: hidden auto;
+  overflow: hidden;
 }
 
 .app__main {
   width: 100%;
-  min-height: 87.5vh;
+  min-height: calc(100vh - #{$app-header-height} - #{$app-footer-height});
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  overflow: hidden auto;
 
   @include respond-to($sidebar-hide-bp) { width: 100vw; }
 }

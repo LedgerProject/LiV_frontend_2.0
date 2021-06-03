@@ -12,11 +12,10 @@
   >
     <input
       v-bind="$attrs"
+      v-maska="maskConfig"
       :value="modelValue"
       class="input-field__input"
-      :class="{
-        'input-field__input--autofill-white': whiteAutofill,
-      }"
+      :class="{ 'input-field__input--autofill-white': whiteAutofill }"
       :aria-label="label"
       :type="isPasswordType && isPasswordShown ? 'text' : type"
       :placeholder="$attrs.placeholder || ' '"
@@ -63,6 +62,18 @@ const INPUT_TYPES = {
   number: 'number',
 }
 
+/* eslint-disable quote-props */
+const MASK_TOKENS = {
+  '#': { pattern: /\d/ },
+  'X': { pattern: /[0-9a-zA-Z]/ },
+  'S': { pattern: /[a-zA-Z]/ },
+  'A': { pattern: /[a-zA-Z]/, transform: v => v.toLocaleUpperCase() },
+  'a': { pattern: /[a-zA-Z]/, transform: v => v.toLocaleLowerCase() },
+  '!': { escape: true },
+  'Z': { pattern: /[0-9a-zA-Z]/, transform: v => v.toLocaleUpperCase() },
+}
+/* eslint-enable quote-props */
+
 const inputTypeValidator = v => !v || Object.values(INPUT_TYPES).includes(v)
 
 export default {
@@ -75,18 +86,26 @@ export default {
     type: { type: String, default: '', validator: inputTypeValidator },
     whiteAutofill: { type: Boolean, default: true },
     trim: { type: Boolean, default: true },
-    mask: { type: String, default: '' },
+    mask: { type: [String, Object, Array], default: null },
   },
 
   emits: ['update:modelValue', 'blur'],
 
   data: () => ({ isCapsLockOn: false, isPasswordShown: false }),
 
-  computed: { isPasswordType () { return this.type === INPUT_TYPES.password } },
+  computed: {
+    isPasswordType () { return this.type === INPUT_TYPES.password },
+
+    maskConfig () {
+      return this.mask
+        ? { mask: this.mask, tokens: MASK_TOKENS }
+        : this.mask
+    },
+  },
 
   methods: {
     onInput (event) {
-      const value = event.target.value
+      const value = this.mask ? event : event.target.value
       if (this.modelValue === value) return
       this.$emit('update:modelValue', value)
     },

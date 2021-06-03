@@ -1,4 +1,6 @@
+import moment from 'moment'
 import isEmpty from 'lodash/isEmpty'
+
 import { useI18n } from 'vue-i18n'
 
 // TODO: fix retranslating error message after change localization language
@@ -31,5 +33,13 @@ export function useValidators () {
     ? ''
     : t('validation.field-error_alphaNum')
 
-  return { required, minLength, maxLength, alphaNum }
+  const alpha = val => /^[a-zA-Z]+$/i.test(val)
+    ? ''
+    : t('validation.field-error_alpha')
+
+  const birthday = val => moment(val, 'YYYY-MM-DD', true).isValid()
+    ? ''
+    : t('validation.field-error_birthday')
+
+  return { required, minLength, maxLength, alphaNum, alpha, birthday }
 }

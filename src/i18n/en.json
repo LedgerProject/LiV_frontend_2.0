@@ -1,4 +1,15 @@
 {
+  "filters": {
+    "user-roles": {
+      "general": "General",
+      "registry": "Registry",
+      "notary": "Notary",
+      "unknown": "Unknown"
+    }
+  },
+  "notifications": {
+    "update-kyc-success": "User profile successfully updated"
+  },
   "errors": {
     "default": "Something bad happened. Please try again later or contact the system owner.",
     "network": "Network error: { msg }",
@@ -9,7 +20,9 @@
     "field-error_minLength": "This field must contain minimum { minLength } symbols",
     "field-error_maxLength": "This field must contain maximum { maxLength } symbols",
     "field-error_alphaNum": "Value should consists of alphanumeric values (A-Z, a-z, 0-9)",
-    "field-error_uniqueValue": "Value is not unique, please try another one"
+    "field-error_alpha": "Value should consists of alphabetic characters (A-Z, a-z)",
+    "field-error_uniqueValue": "Value is not unique, please try another one",
+    "field-error_birthday": "Value is not correct birthday date (YYYY-MM-DD), please try another one"
   },
   "formats": {
     "dates": {

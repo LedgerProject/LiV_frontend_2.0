@@ -9,22 +9,23 @@ export class AccountRecord {
     this.role = record?.role || USER_ROLES.general
     this.address = record?.address || ''
     this.firstName = record?.firstName || ''
-    this.middleName = record?.middleName || ''
+    this.secondName = record?.secondName || ''
     this.lastName = record?.lastName || ''
-    this.passportNumber = record?.passportNumber || ''
+    this.passportId = record?.nif || ''
+    this.birthday = record?.birthday || ''
   }
 
   get fullName () {
-    return `${this.firstName} ${this.middleName} ${this.lastName}`
+    return `${this.firstName} ${this.secondName} ${this.lastName}`
   }
 
   get isKycExist () {
     return Boolean(
       this.address &&
       this.firstName &&
-      this.middleName &&
+      this.secondName &&
       this.lastName &&
-      this.passportNumber,
+      this.passportId,
     )
   }
 }
