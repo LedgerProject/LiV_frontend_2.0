@@ -20,6 +20,8 @@ for further information about branching and tagging conventions.
 - `AppFooter` component
 - `AppHeader` component
 - `Logo` component
+- `Modal` component
+- Profile page and kyc form
 - Will Requests route
 #### Fixed
 - Restoring store from localStorage

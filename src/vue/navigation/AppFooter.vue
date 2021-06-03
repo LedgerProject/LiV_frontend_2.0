@@ -33,7 +33,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 5rem;
+  min-height: $app-footer-height;
   padding: 0 2rem;
   border-top: $col-app-footer-border;
   background: $col-app-footer-background;

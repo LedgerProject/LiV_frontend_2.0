@@ -45,4 +45,6 @@ $field-to-field-gap: 2rem;
   grid-auto-columns: min-content;
 
   &:not(:first-child) { margin-top: 5rem; }
+
+  &--right { justify-content: end; }
 }

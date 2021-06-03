@@ -18,6 +18,7 @@
         />
       </div>
     </div>
+
     <div class="app__form-row">
       <div class="app__form-field">
         <input-field
@@ -55,6 +56,7 @@
     </div>
   </form>
 </template>
+
 <script>
 import { InputField } from '@/vue/fields'
 import { useForm, useValidators } from '@/vue/composables'

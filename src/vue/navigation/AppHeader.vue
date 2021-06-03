@@ -92,7 +92,7 @@ $app-header-button-height: 4rem;
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  min-height: $app-sidebar-logo-height;
+  min-height: $app-header-height;
   padding: 0 2rem;
   border-bottom: $col-app-footer-border;
   background: $col-app-footer-background;
