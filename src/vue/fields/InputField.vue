@@ -86,7 +86,7 @@ export default {
     type: { type: String, default: '', validator: inputTypeValidator },
     whiteAutofill: { type: Boolean, default: true },
     trim: { type: Boolean, default: true },
-    mask: { type: [String, Object, Array], default: null },
+    mask: { type: String, default: '' },
   },
 
   emits: ['update:modelValue', 'blur'],
