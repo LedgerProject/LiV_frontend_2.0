@@ -231,7 +231,7 @@ export default {
         },
       },
       address: {
-        value: props.accountRecord.lastName || '',
+        value: props.accountRecord.address || '',
         validators: {
           required,
           maxLength: maxLength(MAX_FIELD_LENGTH.address),
