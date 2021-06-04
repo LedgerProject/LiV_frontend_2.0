@@ -99,6 +99,13 @@ $field-input-padding-bottom: 0.6rem;
 $field-input-padding: $field-input-padding-top 0 $field-input-padding-bottom 0;
 $field-label-color: $field-color-focused;
 $field-placeholder-color: var(--col-text-secondary);
+$file-field-background-color: rgba($_whiteSmoke, 0.8);
+$file-field-border-color: rgba($col-primary, 0.4);
+$file-field-note-color: rgba($col-primary, 0.6);
+$file-field-title-color: rgba($col-primary, 0.6);
+$file-field-drop-bg-color: $_white;
+$file-field-reset-btn-color: rgba($col-primary, 0.6);
+$file-field-reset-btn-hover-color: rgba($col-primary, 0.8);
 
 // loading error message
 $col-loading-error-message-text: rgba($col-error, 0.8);
@@ -112,6 +119,7 @@ $col-app-button-primary-disabled-bg: lighten($col-app-button-primary-bg, 40%);
 $col-app-button-primary-hover-bg: lighten($col-app-button-primary-bg, 10%);
 
 $col-app-button-secondary-text: rgba($_black, 0.87);
+$col-app-button-secondary-disabled: rgba($_black, 0.3);
 $col-app-button-secondary-bg: $_alto;
 $col-app-button-secondary-disabled-bg: lighten($col-app-button-secondary-bg, 8%);
 $col-app-button-secondary-hover-bg: darken($col-app-button-secondary-bg, 10%);
@@ -123,6 +131,7 @@ $col-app-sidebar-backdrop: rgba($_black, 0.46);
 $col-app-sidebar-backdrop-animation: cubic-bezier(0.4, 0, 0.2, 1);
 $col-app-sidebar-text: var(--col-text);
 $col-app-sidebar-active-elem-background: $_mercury;
+$col-app-sidebar-hover-elem-background: rgba($_mercury, 0.8);
 $col-app-sidebar-burger-button: $_wildSand;
 $col-app-sidebar-burger-icon-color: rgba($_black, 0.87);
 $col-app-sidebar-burger-button-shadow: 
@@ -194,3 +203,8 @@ $col-dropdown-button-hover: rgba($col-primary, 0.2);
 $col-dropdown-shadow: var(--col-dropdown-shadow);
 $col-dropdown-option: $_alto;
 $col-dropdown-option-active: $_gallery;
+
+// will request form
+$col-will-request-form-remove-btn-text: var(--col-primary);
+$col-will-request-form-remove-btn-color-hover-bg: rgba($col-primary, 0.2);
+$col-will-request-form-remove-btn-color-active: darken($col-primary, 10%);

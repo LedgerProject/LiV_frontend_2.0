@@ -21,7 +21,14 @@
     "request-approve-success": "Will request successfully approved",
     "request-reject-success": "Will request successfully rejected",
     "request-release-success": "Will request successfully released",
-    "request-notify-success": "Will request successfully notified"
+    "request-notify-success": "Will request successfully notified",
+    "request-creation-success": "Will request successfully created",
+    "max-recipient-amount-reached": "Reached maximum recipient amount",
+    "min-recipient-amount-reached": "There must be at least one recipient",
+    "file-corrupted-err": "Your file is corrupted",
+    "max-size-exceeded-err": "You cannot upload a file exceeding { maxSize } MB",
+    "incorrect-file-type-err": "You cannot upload a { type} file. Allowed types: { allowedTypes }",
+    "invalid-dimensions-err": "You cannot upload an image with dimensions less than { minWidth }x{ minHeight }"
   },
   "errors": {
     "default": "Something bad happened. Please try again later or contact the system owner.",
@@ -35,7 +42,8 @@
     "field-error_alphaNum": "Value should consists of alphanumeric values (A-Z, a-z, 0-9)",
     "field-error_alpha": "Value should consists of alphabetic characters (A-Z, a-z)",
     "field-error_uniqueValue": "Value is not unique, please try another one",
-    "field-error_birthday": "Value is not correct birthday date (YYYY-MM-DD), please try another one"
+    "field-error_birthday": "Value is not correct birthday date (YYYY-MM-DD), please try another one",
+    "field-error_email": "This field should be a valid email"
   },
   "formats": {
     "dates": {

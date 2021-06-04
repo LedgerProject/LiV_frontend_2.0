@@ -22,6 +22,7 @@
       :tabindex="$attrs.readonly || $attrs.readonly === ''
         ? -1
         : $attrs.tabindex"
+      @input="onInput"
       @focus="onFocus"
       @blur="onBlur"
     >
@@ -180,7 +181,7 @@ $pwd-toggle-btn-width: 3.2rem;
 
   &:read-only,
   &:disabled {
-    cursor: default;
+    cursor: not-allowed;
     filter: grayscale(100%);
     -webkit-text-fill-color: $field-color-unfocused;
     color: $field-color-unfocused;

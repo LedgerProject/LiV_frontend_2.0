@@ -163,6 +163,7 @@ export default {
     const isActionsDisabled = item => {
       let isStatusWrong = false
       if (isAccountNotary.value) isStatusWrong = item.isStatusApproved
+      if (isAccountRegistry.value) isStatusWrong = !item.isStatusApproved
       return !item.isManageable || isDisabled.value || isStatusWrong
     }
 

@@ -10,7 +10,7 @@ export class ScrollUtil {
   */
 
   static enableScroll () {
-    const mainContent = document.body.querySelector('.app__main-content')
+    const mainContent = document.body
     const scrollY = mainContent.style.top
     mainContent.style.position = ''
     mainContent.style.left = ''
@@ -19,7 +19,7 @@ export class ScrollUtil {
   }
 
   static disableScroll () {
-    const mainContent = document.body.querySelector('.app__main-content')
+    const mainContent = document.body
     mainContent.style.top = `-${window.scrollY}px`
     mainContent.style.position = 'fixed'
     mainContent.style.left = '0'

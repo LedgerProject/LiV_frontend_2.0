@@ -51,6 +51,7 @@ class EventBus {
       warning: 'warning',
       error: 'error',
       info: 'info',
+      createWillRequest: 'create-will-request',
     }
   }
 

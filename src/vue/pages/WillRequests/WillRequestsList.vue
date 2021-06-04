@@ -37,6 +37,7 @@ import WillRequestsTable from '@/vue/pages/WillRequests/WillRequestsTable'
 
 import { api } from '@/api'
 import { ref } from 'vue'
+import { Bus } from '@/js/helpers/event-bus'
 import { ErrorHandler } from '@/js/helpers/error-handler'
 import { WillRequestRecord } from '@/js/records/will-request.record'
 
@@ -49,6 +50,8 @@ export default {
     const isLoading = ref(false)
     const isLoadFailed = ref(false)
     const willRequests = ref([])
+
+    Bus.on(Bus.eventList.createWillRequest, () => loadWillRequestsList())
 
     const loadWillRequestsList = async () => {
       isLoading.value = true

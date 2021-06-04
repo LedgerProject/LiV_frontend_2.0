@@ -201,7 +201,7 @@ export default {
   &--secondary {
     --app-button-text: #{$col-app-button-secondary-text};
     --app-button-hover-text: #{$col-app-button-secondary-text};
-    --app-button-disabled-text: #{$col-app-button-secondary-text};
+    --app-button-disabled-text: #{$col-app-button-secondary-disabled};
     --app-button-bg: #{$col-app-button-secondary-bg};
     --app-button-disabled-bg: #{$col-app-button-secondary-disabled-bg};
     --app-button-hover-bg-rgb:
