@@ -73,6 +73,7 @@ import { api } from '@/api'
 import { computed } from 'vue'
 import { ErrorHandler } from '@/js/helpers/error-handler'
 import { Bus } from '@/js/helpers/event-bus'
+import { useI18n } from 'vue-i18n'
 
 const MAX_RECIPIENT_AMOUNT = 10
 const MIN_RECIPIENT_AMOUNT = 1
@@ -85,9 +86,17 @@ export default {
   emits: ['submit'],
 
   setup (_, { emit }) {
+    const { t } = useI18n({ useScope: 'global' })
     const store = useStore()
+
     const accountId = computed(() => store.getters[vuexTypes.accountId])
+    const accountEmail = computed(() => store.getters[vuexTypes.accountEmail])
+
     const { required, maxLength, email, minLength } = useValidators()
+
+    const recipientEmail = val => accountEmail.value !== val
+      ? ''
+      : t('validation.field-error_recipientEmail')
 
     const {
       form,
@@ -104,6 +113,7 @@ export default {
           validators: {
             required,
             email,
+            recipientEmail,
             maxLength: maxLength(MAX_FIELD_LENGTH.email),
             minLength: minLength(MIN_FIELD_LENGTH.email),
           },
@@ -143,6 +153,7 @@ export default {
           validators: {
             required,
             email,
+            recipientEmail,
             maxLength: maxLength(MAX_FIELD_LENGTH.email),
             minLength: minLength(MIN_FIELD_LENGTH.email),
           },
@@ -204,7 +215,6 @@ export default {
     "add-recipient-btn": "Add Recipient",
     "remove-recipient-btn": "Remove Recipient",
     "submit-btn": "Submit",
-    "document": "Document"
   }
 }
 </i18n>

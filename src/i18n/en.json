@@ -43,7 +43,8 @@
     "field-error_alpha": "Value should consists of alphabetic characters (A-Z, a-z)",
     "field-error_uniqueValue": "Value is not unique, please try another one",
     "field-error_birthday": "Value is not correct birthday date (YYYY-MM-DD), please try another one",
-    "field-error_email": "This field should be a valid email"
+    "field-error_email": "This field should be a valid email",
+    "field-error_recipientEmail": "Recipient's email cannot be equal to the current one"
   },
   "formats": {
     "dates": {
