@@ -8,7 +8,7 @@
     </template>
     <template v-else>
       <template v-if="isLoadFailed">
-        <loading-error-message position-center />
+        <loading-error-message />
       </template>
       <template v-else>
         <template v-if="willRequests.length">
@@ -83,7 +83,7 @@ export default {
 {
   "en": {
     "loading-message": "Loading will requests list...",
-    "no-data-title": "No data",
+    "no-data-title": "Nothing there...",
     "no-data-message": "There is no will requests"
   }
 }

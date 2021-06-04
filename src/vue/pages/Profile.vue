@@ -9,7 +9,7 @@
     </template>
     <template v-else>
       <template v-if="isLoadFailed">
-        <loading-error-message position-center />
+        <loading-error-message />
       </template>
       <template v-else>
         <div

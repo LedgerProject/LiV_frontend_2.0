@@ -1,11 +1,14 @@
 import NProgress from 'nprogress'
 
+import { ref } from 'vue'
 import { api } from '@/api'
 import { WILL_REQUEST_OPERATIONS } from '@/js/const/will-request-operations.const'
 import { Bus } from '@/js/helpers/event-bus'
 import { ErrorHandler } from '@/js/helpers/error-handler'
 
 export function useWillRequests () {
+  const isDisabled = ref(false)
+
   const notifyWillRequest = async willRequestId => {
     await api.get(`/will-requests/notify/${willRequestId}`)
   }
@@ -43,17 +46,18 @@ export function useWillRequests () {
     }
   }
 
-  const manageWillRequest = async (id, type, callback = () => { }) => {
+  const manageWillRequest = async (id, type) => {
+    isDisabled.value = true
     NProgress.start()
     try {
       await executeOperationRequest(id, type)
       Bus.success(`notifications.request-${type}-success`)
-      callback()
     } catch (e) {
       ErrorHandler.process(e)
     }
     NProgress.done()
+    isDisabled.value = false
   }
 
-  return { manageWillRequest }
+  return { manageWillRequest, isDisabled }
 }

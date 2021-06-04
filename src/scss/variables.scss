@@ -100,6 +100,11 @@ $field-input-padding: $field-input-padding-top 0 $field-input-padding-bottom 0;
 $field-label-color: $field-color-focused;
 $field-placeholder-color: var(--col-text-secondary);
 
+// loading error message
+$col-loading-error-message-text: rgba($col-error, 0.8);
+$col-loading-error-message-description: rgba($col-error, 0.7);
+$col-loading-error-message-icon-color: rgba($col-error, 0.4);
+
 // app button
 $col-app-button-primary-text: $_white;
 $col-app-button-primary-bg: $col-primary;
@@ -155,6 +160,7 @@ $col-loader-icon: var(--col-primary);
 
 // no data message colors:
 $col-no-data-message-text: var(--col-text);
+$col-no-data-message-icon-color: rgba(var(--col-secondary-rgb), 0.4);
 
 // modal
 $col-modal-backdrop-bg: rgba($_black, 0.2);

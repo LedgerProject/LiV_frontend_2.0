@@ -54,7 +54,7 @@
               v-if="isAccountNotary || isAccountRegistry"
               class="will-request-table__dropdown-td"
             >
-              <dropdown :disabled="!item.isManageable">
+              <dropdown :disabled="isActionsDisabled(item)">
                 <template v-if="isAccountNotary">
                   <template v-if="item.isStatusSubmitted">
                     <button
@@ -146,7 +146,7 @@ export default {
   setup (_, { emit }) {
     const store = useStore()
 
-    const { manageWillRequest } = useWillRequests()
+    const { manageWillRequest, isDisabled } = useWillRequests()
 
     const isAccountNotary = computed(
       () => store.getters[vuexTypes.isAccountNotary],
@@ -156,7 +156,14 @@ export default {
     )
 
     const submitRequest = async (id, type) => {
-      await manageWillRequest(id, type, emit('submit'))
+      await manageWillRequest(id, type)
+      emit('submit')
+    }
+
+    const isActionsDisabled = item => {
+      let isStatusWrong = false
+      if (isAccountNotary.value) isStatusWrong = item.isStatusApproved
+      return !item.isManageable || isDisabled.value || isStatusWrong
     }
 
     return {
@@ -164,6 +171,7 @@ export default {
       isAccountNotary,
       isAccountRegistry,
       submitRequest,
+      isActionsDisabled,
     }
   },
 }
