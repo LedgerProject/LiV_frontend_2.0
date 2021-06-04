@@ -16,7 +16,9 @@ export class AccountRecord {
   }
 
   get fullName () {
-    return `${this.firstName} ${this.secondName} ${this.lastName}`
+    return this.firstName && this.secondName && this.lastName
+      ? `${this.firstName} ${this.secondName} ${this.lastName}`
+      : this.email
   }
 
   get isKycExist () {

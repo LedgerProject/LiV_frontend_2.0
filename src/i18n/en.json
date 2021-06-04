@@ -5,10 +5,23 @@
       "registry": "Registry",
       "notary": "Notary",
       "unknown": "Unknown"
+    },
+    "will-request-statuses": {
+      "approved": "Approved",
+      "deleted": "Deleted",
+      "rejected": "Rejected",
+      "submitted": "Submitted",
+      "notified": "Notified",
+      "released": "Released",
+      "unknown": "Unknown"
     }
   },
   "notifications": {
-    "update-kyc-success": "User profile successfully updated"
+    "update-kyc-success": "User profile successfully updated",
+    "request-approve-success": "Will request successfully approved",
+    "request-reject-success": "Will request successfully rejected",
+    "request-release-success": "Will request successfully released",
+    "request-notify-success": "Will request successfully notified"
   },
   "errors": {
     "default": "Something bad happened. Please try again later or contact the system owner.",

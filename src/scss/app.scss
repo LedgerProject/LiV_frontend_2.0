@@ -7,7 +7,7 @@
   --col-primary: #{$col-primary};
   --col-primary-rgb: 255, 0, 90;
   --col-secondary: #{$col-secondary};
-  --col-secondary-rgb: 0, 0, 0;
+  --col-secondary-rgb: 11, 19, 91;
   --col-block-bg: #ffffff;
   --col-block-bg-rgb: 255, 255, 255;
   --col-btn: var(--col-primary);
@@ -23,6 +23,10 @@
     0 0.3rem 0.5rem -0.1rem rgba(var(--col-secondary-rgb), 0.2),
     0 0.6rem 1rem 0 rgba(var(--col-secondary-rgb), 0.14),
     0 0.1rem 1.8rem 0 rgba(var(--col-secondary-rgb), 0.12);
+  --col-dropdown-shadow:
+    0 0.5rem 0.5rem -0.3rem rgba(0, 0, 0, 0.2),
+    0 0.8rem 1rem 0.1rem rgba(0, 0, 0, 0.14),
+    0 0.3rem 1.4rem 0.2rem rgba(0, 0, 0, 0.12);
 }
 
 * {
@@ -123,8 +127,70 @@ body {
   .bar {
     // !importants are for overwrite nprogress’ styles
     background: var(--col-primary) !important;
-    height: 0.2rem !important;
+    height: 0.3rem !important;
   }
 }
 
 .app__page-content { padding: 3rem 2rem; }
+
+.app__table {
+  overflow-x: auto;
+  border-radius: 0.4rem;
+  padding: 2.8rem;
+  background-color: $col-table-background;
+
+  &--with-shadow { box-shadow: $col-table-shadow; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+      border-bottom: 0.1rem solid $col-table-border;
+
+      th {
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-align: left;
+        height: 4.8rem;
+        padding: 0 1.6rem;
+        overflow: hidden;
+        max-width: 12rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: $col-table-head-text;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 0.1rem solid $col-table-border;
+        transition: background-color 0.1s ease-in-out;
+
+        &:not([disabled]):hover { background-color: $col-table-row-selected; }
+
+        &[disabled] { background-color: $col-table-row-disabled; }
+
+        td {
+          font-size: 1.4rem;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          max-width: 12rem;
+          white-space: nowrap;
+          color: $col-table-cell-text;
+          height: 4.8rem;
+          padding: 0 1.6rem;
+        }
+      }
+    }
+  }
+
+  &.app__table--clickable-rows tbody tr { cursor: pointer; }
+
+  &--last-td-to-right {
+    & > table > tbody > tr > td:not(:only-of-type):last-of-type,
+    & > table > thead > th:not(:only-of-type):last-of-type {
+      text-align: right;
+    }
+  }
+}

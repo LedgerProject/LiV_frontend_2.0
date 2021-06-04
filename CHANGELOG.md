@@ -21,8 +21,9 @@ for further information about branching and tagging conventions.
 - `AppHeader` component
 - `Logo` component
 - `Modal` component
+- `Dropdown` component
 - Profile page and kyc form
-- Will Requests route
+- Will Requests list page
 #### Fixed
 - Restoring store from localStorage
 

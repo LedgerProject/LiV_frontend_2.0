@@ -36,6 +36,7 @@ $z-app-sidebar: 120;
 $z-modal: 160;
 $z-modal-backdrop: -1;
 $z-modal-pane: 165;
+$z-dropdown: 10;
 
 $_white: #ffffff;
 $_wildSand: #f5f5f5;
@@ -48,6 +49,9 @@ $_yellowGreen: #3cab00;
 $_orangePeel: #ffa333;
 $_mercury: #e5e5e5;
 $_gallery : #eeeeee;
+$_whiteSmoke: #f5f6f9;
+$_lightPurple: #837fa1;
+$_grayishBlue: #252733;
 
 // status colors:
 $col-warning: $_orangePeel;
@@ -96,6 +100,11 @@ $field-input-padding: $field-input-padding-top 0 $field-input-padding-bottom 0;
 $field-label-color: $field-color-focused;
 $field-placeholder-color: var(--col-text-secondary);
 
+// loading error message
+$col-loading-error-message-text: rgba($col-error, 0.8);
+$col-loading-error-message-description: rgba($col-error, 0.7);
+$col-loading-error-message-icon-color: rgba($col-error, 0.4);
+
 // app button
 $col-app-button-primary-text: $_white;
 $col-app-button-primary-bg: $col-primary;
@@ -106,7 +115,6 @@ $col-app-button-secondary-text: rgba($_black, 0.87);
 $col-app-button-secondary-bg: $_alto;
 $col-app-button-secondary-disabled-bg: lighten($col-app-button-secondary-bg, 8%);
 $col-app-button-secondary-hover-bg: darken($col-app-button-secondary-bg, 10%);
-
 
 // app sidebar
 $col-app-sidebar-background: var(--col-block-bg);
@@ -131,12 +139,10 @@ $col-app-footer-text: var(--col-text);
 $col-app-header-border: 0.1rem solid $_alto;
 $col-app-header-background: var(--col-block-bg);
 $col-app-header-text: var(--col-text);
+$col-app-header-text-active: var(--col-primary);
 $col-app-header-account-btn-hover: $_gallery;
 $col-app-header-dropdown: var(--col-block-bg);
-$col-app-header-dropdown-shadow: 
-  0 0.5rem 0.5rem -0.3rem rgba($_black, 0.2),
-  0 0.8rem 1rem 0.1rem rgba($_black, 0.14),
-  0 0.3rem 1.4rem 0.2rem rgba($_black, 0.12);
+$col-app-header-dropdown-shadow: var(--col-dropdown-shadow);
 
 // logo viewer
 $col-logo-viewer-background: $col-primary;
@@ -154,13 +160,37 @@ $col-loader-icon: var(--col-primary);
 
 // no data message colors:
 $col-no-data-message-text: var(--col-text);
+$col-no-data-message-icon-color: rgba(var(--col-secondary-rgb), 0.4);
 
 // modal
 $col-modal-backdrop-bg: rgba($_black, 0.2);
 $col-modal-btn-text: var(--col-primary);
-$col-modal-head-text: var(--col-primary);;
+$col-modal-head-text: var(--col-primary);
 $col-modal-btn-color-hover-bg: rgba($col-primary, 0.2);
-$col-modal-btn-color-active: darken($col-primary, 5%);
+$col-modal-btn-color-active: darken($col-primary, 10%);
 $col-modal-bg: var(--col-block-bg);
 $col-modal-head-bg: $col-modal-bg;
 $col-modal-head-text: $col-modal-head-text;
+
+// table
+$col-table-background: var(--col-block-bg);
+$col-table-border: $_alto;
+$col-table-cell-text: var(--col-text);
+$col-table-cell-text-inactive: $_lightPurple;
+$col-table-head-text: var(--col-primary);
+$col-table-row-selected: $_gallery;
+$col-table-row-disabled: $_alto;
+$col-table-shadow: 
+  0 0.3rem 0.1rem -0.2rem rgba($_black, 0.2),
+  0 0.2rem 0.2rem 0 rgba($_black, 0.14),
+  0 0.1rem 0.5rem 0 rgba($_black, 0.12);
+
+// dropdown
+$col-dropdown-bg: var(--col-block-bg);
+$col-dropdown-text: $_black;
+$col-dropdown-text-active: var(--col-primary);
+$col-dropdown-icon: var(--col-primary);
+$col-dropdown-button-hover: rgba($col-primary, 0.2);
+$col-dropdown-shadow: var(--col-dropdown-shadow);
+$col-dropdown-option: $_alto;
+$col-dropdown-option-active: $_gallery;
