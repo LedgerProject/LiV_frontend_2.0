@@ -39,19 +39,17 @@ export function useForm (init) {
   const enableForm = () => { isFormDisabled.value = false }
 
   const isAllFieldsValid = computed(() => {
-    const errors = Object.keys(form).reduce((acc, key) => {
-      if (Array.isArray(form[key])) {
-        Object.keys(form[key]).forEach(innerField => {
-          if (!form[key][innerField].isValid) acc.push(form[key][innerField])
-        })
-      } else if (!form[key].isValid) {
-        acc.push(form[key])
+    const errors = Object.values(form).reduce((acc, field) => {
+      if (Array.isArray(field)) {
+        Object.values(field).forEach(inner => { if (!inner.isValid) acc++ })
+      } else if (!field.isValid) {
+        acc++
       }
 
       return acc
-    }, [])
+    }, 0)
 
-    return !errors.length
+    return !errors
   })
 
   const touchForm = () => Object.keys(form).forEach(key => {
