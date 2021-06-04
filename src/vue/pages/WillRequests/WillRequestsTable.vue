@@ -1,6 +1,6 @@
 <template>
   <div
-    class="will-requests-table app__table"
+    class="will-requests-table app__table app__table--last-td-to-right"
     :class="['app__table--clickable-rows app__table--with-shadow']"
   >
     <table>
@@ -17,7 +17,7 @@
         <th>
           {{ $t('table-head-status') }}
         </th>
-        <th v-if="!isAccountGeneral">
+        <th v-if="isAccountNotary || isAccountRegistry">
           {{ $t('table-head-action') }}
         </th>
       </thead>
@@ -33,9 +33,10 @@
           :key="item.id"
         >
           <tr
+            v-if="item.id"
+            role="link"
             @click="navigate"
             @keypress.enter="navigate"
-            role="link"
           >
             <td>
               {{ item.id }}
@@ -49,8 +50,62 @@
             <td>
               {{ $globalizeWillRequestStatus(item.statusId) }}
             </td>
-            <td v-if="!isAccountGeneral">
-              <!-- {{ item.statusId | globalizeWillRequestStatus }} -->
+            <td
+              v-if="isAccountNotary || isAccountRegistry"
+              class="will-request-table__dropdown-td"
+            >
+              <dropdown :disabled="!item.isManageable">
+                <template v-if="isAccountNotary">
+                  <template v-if="item.isStatusSubmitted">
+                    <button
+                      type="button"
+                      :title="$t('approve-btn')"
+                      :aria-label="$t('approve-btn')"
+                      @click.prevent="submitRequest(
+                        item.id, OPERATION_TYPES.approve
+                      )"
+                    >
+                      {{ $t('approve-btn') }}
+                      <i class="mdi mdi-check" />
+                    </button>
+                    <button
+                      type="button"
+                      :title="$t('reject-btn')"
+                      :aria-label="$t('reject-btn')"
+                      @click.prevent="submitRequest(
+                        item.id, OPERATION_TYPES.reject
+                      )"
+                    >
+                      {{ $t('reject-btn') }}
+                      <i class="mdi mdi-close" />
+                    </button>
+                  </template>
+                  <button
+                    v-else-if="item.isStatusNotified"
+                    type="button"
+                    :title="$t('release-btn')"
+                    :aria-label="$t('release-btn')"
+                    @click.prevent="submitRequest(
+                      item.id, OPERATION_TYPES.release
+                    )"
+                  >
+                    {{ $t('release-btn') }}
+                    <i class="mdi mdi-email-send-outline" />
+                  </button>
+                </template>
+                <button
+                  v-if="item.isStatusApproved && isAccountRegistry"
+                  type="button"
+                  :title="$t('notify-btn')"
+                  :aria-label="$t('notify-btn')"
+                  @click.prevent="submitRequest(
+                    item.id, OPERATION_TYPES.notify
+                  )"
+                >
+                  {{ $t('notify-btn') }}
+                  <i class="mdi mdi-shield-check-outline" />
+                </button>
+              </dropdown>
             </td>
           </tr>
         </router-link>
@@ -63,22 +118,60 @@
 import { useStore } from 'vuex'
 import { computed } from 'vue'
 import { vuexTypes } from '@/vuex'
+import { useWillRequests } from '@/vue/composables'
+
+import Dropdown from '@/vue/common/Dropdown'
+
+const OPERATION_TYPES = {
+  reject: 'reject',
+  approve: 'approve',
+  notify: 'notify',
+  release: 'release',
+}
 
 export default {
   name: 'will-requests-table',
 
-  props: { willRequests: { type: Array, default: () => ([]) } },
+  components: { Dropdown },
 
-  setup () {
+  props: {
+    willRequests: {
+      type: Array /** {@link WillRequestRecord} **/,
+      default: () => ([]),
+    },
+  },
+
+  emits: ['submit'],
+
+  setup (_, { emit }) {
     const store = useStore()
-    const isAccountGeneral = computed(
-      () => store.getters[vuexTypes.isAccountGeneral],
+
+    const { manageWillRequest } = useWillRequests()
+
+    const isAccountNotary = computed(
+      () => store.getters[vuexTypes.isAccountNotary],
+    )
+    const isAccountRegistry = computed(
+      () => store.getters[vuexTypes.isAccountRegistry],
     )
 
-    return { isAccountGeneral }
+    const submitRequest = async (id, type) => {
+      await manageWillRequest(id, type, emit('submit'))
+    }
+
+    return {
+      OPERATION_TYPES,
+      isAccountNotary,
+      isAccountRegistry,
+      submitRequest,
+    }
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.will-request-table__dropdown-td { width: 2rem; }
+</style>
 
 <i18n>
 {
@@ -87,7 +180,11 @@ export default {
     "table-head-creator": "Creator",
     "table-head-recipient": "Recipient",
     "table-head-status": "Status",
-    "table-head-action": "Action"
+    "table-head-action": "Action",
+    "reject-btn": "Reject",
+    "approve-btn": "Approve",
+    "release-btn": "Release",
+    "notify-btn": "Notify"
   }
 }
 </i18n>

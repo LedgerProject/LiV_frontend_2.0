@@ -23,6 +23,10 @@
     0 0.3rem 0.5rem -0.1rem rgba(var(--col-secondary-rgb), 0.2),
     0 0.6rem 1rem 0 rgba(var(--col-secondary-rgb), 0.14),
     0 0.1rem 1.8rem 0 rgba(var(--col-secondary-rgb), 0.12);
+  --col-dropdown-shadow:
+    0 0.5rem 0.5rem -0.3rem rgba(0, 0, 0, 0.2),
+    0 0.8rem 1rem 0.1rem rgba(0, 0, 0, 0.14),
+    0 0.3rem 1.4rem 0.2rem rgba(0, 0, 0, 0.12);
 }
 
 * {
@@ -123,7 +127,7 @@ body {
   .bar {
     // !importants are for overwrite nprogress’ styles
     background: var(--col-primary) !important;
-    height: 0.2rem !important;
+    height: 0.3rem !important;
   }
 }
 
@@ -184,7 +188,8 @@ body {
   &.app__table--clickable-rows tbody tr { cursor: pointer; }
 
   &--last-td-to-right {
-    & > table > tbody > tr > td:not(:only-of-type):last-of-type {
+    & > table > tbody > tr > td:not(:only-of-type):last-of-type,
+    & > table > thead > th:not(:only-of-type):last-of-type {
       text-align: right;
     }
   }

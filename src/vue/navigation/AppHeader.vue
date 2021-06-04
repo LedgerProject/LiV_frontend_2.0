@@ -3,11 +3,12 @@
     <div class="app-header__account-button-wrapper">
       <button
         v-ripple
+        v-click-outside="closeDropdown"
         type="button"
         class="app-header__account-button"
         :aria-label="$t('account')"
         :title="$t('account')"
-        @click="openDropdown"
+        @click.prevent="openDropdown"
       >
         <i class="app-header__account-button-icon mdi mdi-account" />
         {{ accountEmail }}
@@ -15,7 +16,6 @@
       <transition name="app-header__dropdown-transition">
         <div
           v-if="isDropdownShown"
-          v-click-away="closeDropdown"
           class="app-header__dropdown"
         >
           <router-link
@@ -24,7 +24,7 @@
             :to="$routes.profile"
             :title="$t('profile')"
             :aria-label="$t('profile')"
-            @click="closeDropdown"
+            @click.prevent="closeDropdown"
           >
             {{ $t('profile') }}
             <i class="app-header__dropdown-button-icon mdi mdi-account" />
@@ -35,10 +35,11 @@
             class="app-header__dropdown-button"
             :title="$t('log-out')"
             :aria-label="$t('log-out')"
-            @click="logout"
+            @click.prevent="logout"
           >
             {{ $t('log-out') }}
-            <i class="app-header__dropdown-button-icon mdi mdi-account" />
+            <!-- eslint-disable-next-line max-len -->
+            <i class="app-header__dropdown-button-icon mdi mdi-logout-variant" />
           </button>
         </div>
       </transition>
@@ -123,9 +124,9 @@ $app-header-button-height: 4rem;
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  min-width: 18rem;
   top: $app-header-button-height + 0.2rem;
-  left: 0;
+  right: 2rem;
   box-shadow: $col-app-header-dropdown-shadow;
   border-radius: 0.4rem;
   padding: 1.6rem;
@@ -138,19 +139,28 @@ $app-header-button-height: 4rem;
   justify-content: space-between;
   text-decoration: none;
   padding: 1rem;
-  text-transform: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 0.4rem;
   color: $col-app-header-text;
+  opacity: 0.8;
+  transition:
+    opacity 0.15s ease-in-out,
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out;
 
   &:not(:first-child) { margin-top: 1rem; }
 
   &:not([disabled]):hover,
   &:not([disabled]):focus,
   &.router-link-active {
+    opacity: 1;
+    color: $col-app-header-text-active;
     background-color: $col-app-header-account-btn-hover;
   }
 }
 
-.app-header__dropdown-button-icon { font-size: 1.7rem; }
+.app-header__dropdown-button-icon { font-size: 2rem; }
 
 .app-header__dropdown-transition-enter-active {
   animation: app-header-dropdown-transition 0.15s ease-in-out;

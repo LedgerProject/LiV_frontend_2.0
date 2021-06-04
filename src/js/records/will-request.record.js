@@ -18,4 +18,22 @@ export class WillRequestRecord {
       ? new AccountRecord(record.recipient)
       : new AccountRecord({})
   }
+
+  get isStatusSubmitted () {
+    return +this.statusId === WILL_REQUEST_STATES.submitted
+  }
+
+  get isStatusNotified () {
+    return +this.statusId === WILL_REQUEST_STATES.notified
+  }
+
+  get isStatusApproved () {
+    return +this.statusId === WILL_REQUEST_STATES.approved
+  }
+
+  get isManageable () {
+    return this.isStatusSubmitted ||
+      this.isStatusNotified ||
+      this.isStatusApproved
+  }
 }

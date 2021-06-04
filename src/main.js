@@ -9,7 +9,7 @@ import { store } from '@/vuex'
 import { vueRoutes } from '@/vue-router/routes'
 import { CONFIG } from '@/config'
 import { i18n } from '@/i18n'
-import { ripple } from '@/vue/directives/ripple'
+import { ripple, clickOutside } from '@/vue/directives'
 import { createApp, h, getCurrentInstance } from 'vue'
 import {
   useFormatDate,
@@ -18,7 +18,6 @@ import {
 } from '@/vue/composables'
 import { ErrorHandler } from '@/js/helpers/error-handler'
 
-import VueClickAway from 'vue3-click-away'
 import Maska from 'maska'
 
 const app = createApp({
@@ -53,13 +52,13 @@ app
   .use(store)
   .use(router)
   .use(i18n)
-  .use(VueClickAway)
   .use(Maska)
 
 app.config.globalProperties.$routes = vueRoutes
 app.config.globalProperties.$config = CONFIG
 
 app.directive('ripple', ripple)
+app.directive('click-outside', clickOutside)
 
 app.component('AppButton', AppButton)
 

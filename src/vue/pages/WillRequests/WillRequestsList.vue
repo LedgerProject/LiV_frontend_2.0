@@ -12,7 +12,10 @@
       </template>
       <template v-else>
         <template v-if="willRequests.length">
-          <will-requests-table :will-requests="willRequests"/>
+          <will-requests-table
+            :will-requests="willRequests"
+            @submit="loadWillRequestsList"
+          />
         </template>
         <template v-else>
           <no-data-message
@@ -51,9 +54,11 @@ export default {
       isLoading.value = true
       isLoadFailed.value = false
       try {
-        const { data } = await api.get('/will-requests/', {
-        })
-        willRequests.value = data.map(el => new WillRequestRecord(el))
+        const { data } = await api.get('/will-requests/')
+        willRequests.value = data
+        // TODO: remove filter (temporary handler for null items)
+          .filter(i => i)
+          .map(el => new WillRequestRecord(el))
       } catch (e) {
         isLoadFailed.value = true
         ErrorHandler.process(e)
@@ -67,6 +72,7 @@ export default {
       isLoading,
       isLoadFailed,
       willRequests,
+      loadWillRequestsList,
     }
   },
 
