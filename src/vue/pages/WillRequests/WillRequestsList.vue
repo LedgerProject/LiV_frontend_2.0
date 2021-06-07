@@ -36,10 +36,12 @@ import NoDataMessage from '@/vue/common/NoDataMessage'
 import WillRequestsTable from '@/vue/pages/WillRequests/WillRequestsTable'
 
 import { api } from '@/api'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { Bus } from '@/js/helpers/event-bus'
 import { ErrorHandler } from '@/js/helpers/error-handler'
 import { WillRequestRecord } from '@/js/records/will-request.record'
+import { useStore } from 'vuex'
+import { vuexTypes } from '@/vuex'
 
 export default {
   name: 'will-requests-list',
@@ -47,6 +49,8 @@ export default {
   components: { Loader, LoadingErrorMessage, NoDataMessage, WillRequestsTable },
 
   setup () {
+    const store = useStore()
+    const accountId = computed(() => store.getters[vuexTypes.accountId])
     const isLoading = ref(false)
     const isLoadFailed = ref(false)
     const willRequests = ref([])
@@ -57,7 +61,10 @@ export default {
       isLoading.value = true
       isLoadFailed.value = false
       try {
-        const { data } = await api.get('/will-requests/')
+        const { data } = await api.get('/will-requests/', {
+          headers: { 'Content-Type': 'multipart/form-data' },
+          params: { ownerId: accountId.value },
+        })
         willRequests.value = data
         // TODO: remove filter (temporary handler for null items)
           .filter(i => i)

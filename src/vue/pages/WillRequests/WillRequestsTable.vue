@@ -68,7 +68,7 @@
                       :title="$t('approve-btn')"
                       :aria-label="$t('approve-btn')"
                       @click.prevent="submitRequest(
-                        item.id, OPERATION_TYPES.approve
+                        item.id, WILL_REQUEST_OPERATIONS.approve
                       )"
                     >
                       {{ $t('approve-btn') }}
@@ -79,7 +79,7 @@
                       :title="$t('reject-btn')"
                       :aria-label="$t('reject-btn')"
                       @click.prevent="submitRequest(
-                        item.id, OPERATION_TYPES.reject
+                        item.id, WILL_REQUEST_OPERATIONS.reject
                       )"
                     >
                       {{ $t('reject-btn') }}
@@ -92,7 +92,7 @@
                     :title="$t('release-btn')"
                     :aria-label="$t('release-btn')"
                     @click.prevent="submitRequest(
-                      item.id, OPERATION_TYPES.release
+                      item.id, WILL_REQUEST_OPERATIONS.release
                     )"
                   >
                     {{ $t('release-btn') }}
@@ -105,7 +105,7 @@
                   :title="$t('notify-btn')"
                   :aria-label="$t('notify-btn')"
                   @click.prevent="submitRequest(
-                    item.id, OPERATION_TYPES.notify
+                    item.id, WILL_REQUEST_OPERATIONS.notify
                   )"
                 >
                   {{ $t('notify-btn') }}
@@ -125,15 +125,9 @@ import { useStore } from 'vuex'
 import { computed, ref } from 'vue'
 import { vuexTypes } from '@/vuex'
 import { manageWillRequest } from '@/js/helpers/will-requests-manager'
+import { WILL_REQUEST_OPERATIONS } from '@/js/const/will-request-operations.const'
 
 import Dropdown from '@/vue/common/Dropdown'
-
-const OPERATION_TYPES = {
-  reject: 'reject',
-  approve: 'approve',
-  notify: 'notify',
-  release: 'release',
-}
 
 export default {
   name: 'will-requests-table',
@@ -175,7 +169,7 @@ export default {
     }
 
     return {
-      OPERATION_TYPES,
+      WILL_REQUEST_OPERATIONS,
       isAccountNotary,
       isAccountRegistry,
       submitRequest,
