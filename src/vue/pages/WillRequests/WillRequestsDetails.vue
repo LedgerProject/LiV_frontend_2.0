@@ -51,6 +51,7 @@ import { useRoute } from 'vue-router'
 import { ErrorHandler } from '@/js/helpers/error-handler'
 import { WillRequestRecord } from '@/js/records/will-request.record'
 import { manageWillRequest } from '@/js/helpers/will-requests-manager'
+import { Bus } from '@/js/helpers/event-bus'
 
 export default {
   name: 'will-requests-details',
@@ -69,6 +70,8 @@ export default {
     const isLoadFailed = ref(false)
     const willRequest = ref(null)
     const isDisabled = ref(false)
+
+    Bus.on(Bus.eventList.createWillRequest, () => loadWillRequest())
 
     const loadWillRequest = async () => {
       isLoading.value = true
