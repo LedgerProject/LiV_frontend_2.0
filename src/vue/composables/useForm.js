@@ -30,22 +30,33 @@ export function useForm (init) {
   const isFormDisabled = ref(false)
 
   for (const [key, value] of Object.entries(init)) {
-    form[key] = useField(value)
+    form[key] = Array.isArray(value)
+      ? value.map(i => useField(i))
+      : useField(value)
   }
 
   const disableForm = () => { isFormDisabled.value = true }
   const enableForm = () => { isFormDisabled.value = false }
 
   const isAllFieldsValid = computed(() => {
-    const errors = Object.keys(form).reduce((acc, key) => {
-      if (!form[key].isValid) acc.push(form[key])
-      return acc
-    }, [])
+    const errors = Object.values(form).reduce((acc, field) => {
+      if (Array.isArray(field)) {
+        Object.values(field).forEach(inner => { if (!inner.isValid) acc++ })
+      } else if (!field.isValid) {
+        acc++
+      }
 
-    return !errors.length
+      return acc
+    }, 0)
+
+    return !errors
   })
 
-  const touchForm = () => Object.keys(form).forEach(key => form[key].blur())
+  const touchForm = () => Object.keys(form).forEach(key => {
+    return Array.isArray(form[key])
+      ? form[key].forEach(i => i.blur())
+      : form[key].blur()
+  })
 
   const isFormValid = () => {
     touchForm()
@@ -75,6 +86,26 @@ export function useForm (init) {
     }
   }
 
+  const addField = (formFieldKey, field) => {
+    if (!formFieldKey || !field) return
+
+    if (Array.isArray(form[formFieldKey])) {
+      form[formFieldKey].push(useField(field))
+    } else {
+      form[formFieldKey] = useField(field)
+    }
+  }
+
+  const removeField = (formFieldKey, index) => {
+    if (!formFieldKey) return
+
+    if (Number.isInteger(index) && Array.isArray(form[formFieldKey])) {
+      form[formFieldKey].splice(index, 1)
+    } else {
+      delete form[formFieldKey]
+    }
+  }
+
   return {
     form,
     isFormDisabled,
@@ -82,5 +113,7 @@ export function useForm (init) {
     disableForm,
     enableForm,
     clearFields,
+    addField,
+    removeField,
   }
 }

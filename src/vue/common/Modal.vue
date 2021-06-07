@@ -144,6 +144,7 @@ $modal-close-btn-size: 3rem;
   border-radius: 1.6rem;
   align-items: center;
   overflow: hidden auto;
+  max-height: 90vh;
 
   @include respond-to(small) {
     /* stylelint-disable declaration-no-important */

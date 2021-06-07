@@ -50,16 +50,33 @@
 <script>
 import { useStore } from 'vuex'
 import { vuexTypes } from '@/vuex'
-import { ref, computed } from 'vue'
+import { ref, computed, watchEffect, onBeforeUnmount } from 'vue'
+
+const INTERVAL = 45000
 
 export default {
   name: 'app-header',
 
   setup () {
     const store = useStore()
+    const jwtToken = computed(() => store.getters[vuexTypes.jwtToken])
     const isDropdownShown = ref(false)
 
+    let intervalId
+
     const closeDropdown = () => { isDropdownShown.value = false }
+
+    const loadAccount = async () => {
+      await store.dispatch(vuexTypes.LOAD_ACCOUNT, jwtToken.value)
+    }
+
+    const startInverval = () => {
+      intervalId = setInterval(loadAccount, INTERVAL)
+    }
+
+    watchEffect(() => { if (!intervalId) startInverval() })
+
+    onBeforeUnmount(() => { clearInterval(intervalId) })
 
     const openDropdown = event => {
       event.target.blur()

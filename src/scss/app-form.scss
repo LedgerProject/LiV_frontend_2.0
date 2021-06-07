@@ -36,6 +36,8 @@ $field-to-field-gap: 2rem;
       margin-top: $margin-row-to-row-small;
     }
   }
+
+  &--row-always { @include respond-to(small) { flex-direction: row; } }
 }
 
 .app__form-actions {

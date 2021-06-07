@@ -24,6 +24,9 @@ for further information about branching and tagging conventions.
 - `Dropdown` component
 - Profile page and kyc form
 - Will Requests list page
+- Will Requests form
+- `FileField` component
+- Build version displaying
 #### Fixed
 - Restoring store from localStorage
 

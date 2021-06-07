@@ -41,34 +41,75 @@
             class="app-sidebar__link"
             :to="$routes.willRequests"
             :title="$t('will-requests-link')"
+            :aria-label="$t('will-requests-link')"
             @click="closeSidebar"
           >
             <i class="mdi mdi-format-list-checkbox app-sidebar__link-icon"/>
             {{ $t('will-requests-link') }}
           </router-link>
+          <button
+            v-if="isAccountGeneral"
+            v-ripple
+            type="button"
+            class="app-sidebar__link"
+            :title="$t('create-will-request-link')"
+            :aria-label="$t('create-will-request-link')"
+            @click="closeSidebar(); isModalShown = true"
+          >
+            <i class="mdi mdi-playlist-plus app-sidebar__link-icon"/>
+            {{ $t('create-will-request-link') }}
+          </button>
         </nav>
       </section>
+      <section class="app-sidebar__footer-section">
+        {{ $config.BUILD_VERSION }}
+      </section>
     </aside>
+    <modal
+      v-if="isAccountGeneral"
+      v-model:is-shown="isModalShown"
+      :close-by-click-outside="false"
+      width="40"
+    >
+      <template #heading>
+        {{ $t('create-will-request-heading') }}
+      </template>
+      <will-request-form @submit="isModalShown = false" />
+    </modal>
   </div>
 </template>
 
 <script>
 import Logo from '@/vue/common/Logo'
+import Modal from '@/vue/common/Modal'
+import WillRequestForm from '@/vue/forms/WillRequestForm'
 
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
+import { vuexTypes } from '@/vuex'
 
 export default {
   name: 'app-sidebar',
 
-  components: { Logo },
+  components: { Logo, Modal, WillRequestForm },
 
   setup () {
+    const store = useStore()
     const isOpened = ref(false)
+    const isModalShown = ref(false)
 
     const closeSidebar = () => { isOpened.value = false }
     const openSidebar = () => { isOpened.value = true }
 
-    return { isOpened, closeSidebar, openSidebar }
+    return {
+      isOpened,
+      closeSidebar,
+      openSidebar,
+      isModalShown,
+      isAccountGeneral: computed(
+        () => store.getters[vuexTypes.isAccountGeneral],
+      ),
+    }
   },
 }
 </script>
@@ -228,8 +269,13 @@ export default {
   color: $col-app-sidebar-text;
   text-decoration: none;
   font-weight: 500;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   width: 100%;
+  transition: background-color 0.2s ease-in-out;
+
+  &:not(:first-child) { margin-top: 1rem; }
+
+  &:hover { background-color: $col-app-sidebar-hover-elem-background; }
 
   &.router-link-active {
     background-color: $col-app-sidebar-active-elem-background;
@@ -237,14 +283,23 @@ export default {
   }
 }
 
-.app-sidebar__link-icon { font-size: 1.8rem; }
+.app-sidebar__link-icon { font-size: 2rem; }
+
+.app-sidebar__footer-section {
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.2rem;
+  color: $col-app-sidebar-build-version;
+}
 </style>
 
 <i18n>
 {
   "en": {
     "will-requests-link": "Will Requests",
-    "burger-menu": "Burger menu"
+    "burger-menu": "Burger menu",
+    "create-will-request-link": "Create Will Request",
+    "create-will-request-heading": "Create Will Request"
   }
 }
 </i18n>

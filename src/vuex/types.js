@@ -32,6 +32,8 @@ const getters = {
 
   // account
   account: 'account',
+  accountId: 'accountId',
+  accountEmail: 'accountEmail',
   isKycExist: 'isKycExist',
   isAccountGeneral: 'isAccountGeneral',
   isAccountNotary: 'isAccountNotary',

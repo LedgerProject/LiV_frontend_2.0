@@ -17,9 +17,9 @@ export class ErrorHandler {
   }
 
   static mapError (error) {
-    const errorData = error?.response?.data
+    const errorData = error?.response?.status
 
-    return errorData === 'Invalid credentials'
+    return errorData === 403
       ? new errors.WrongCredentialsError(error)
       : error
   }

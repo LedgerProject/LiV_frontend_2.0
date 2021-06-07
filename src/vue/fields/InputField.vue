@@ -22,6 +22,7 @@
       :tabindex="$attrs.readonly || $attrs.readonly === ''
         ? -1
         : $attrs.tabindex"
+      @input="onInput"
       @focus="onFocus"
       @blur="onBlur"
     >
@@ -105,7 +106,7 @@ export default {
 
   methods: {
     onInput (event) {
-      const value = this.mask ? event : event.target.value
+      const value = event.target.value
       if (this.modelValue === value) return
       this.$emit('update:modelValue', value)
     },
@@ -180,7 +181,7 @@ $pwd-toggle-btn-width: 3.2rem;
 
   &:read-only,
   &:disabled {
-    cursor: default;
+    cursor: not-allowed;
     filter: grayscale(100%);
     -webkit-text-fill-color: $field-color-unfocused;
     color: $field-color-unfocused;

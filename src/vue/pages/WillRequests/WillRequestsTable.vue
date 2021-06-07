@@ -45,7 +45,13 @@
               {{ item.creator.fullName }}
             </td>
             <td>
-              {{ item.recipient.fullName }}
+              <p
+                v-for="recipient in item.recipients"
+                class="will-requests-table__recipient"
+                :key="recipient.id"
+              >
+                {{ recipient.fullName }}
+              </p>
             </td>
             <td>
               {{ $globalizeWillRequestStatus(item.statusId) }}
@@ -116,9 +122,9 @@
 
 <script>
 import { useStore } from 'vuex'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { vuexTypes } from '@/vuex'
-import { useWillRequests } from '@/vue/composables'
+import { manageWillRequest } from '@/js/helpers/will-requests-manager'
 
 import Dropdown from '@/vue/common/Dropdown'
 
@@ -145,8 +151,7 @@ export default {
 
   setup (_, { emit }) {
     const store = useStore()
-
-    const { manageWillRequest, isDisabled } = useWillRequests()
+    const isDisabled = ref(false)
 
     const isAccountNotary = computed(
       () => store.getters[vuexTypes.isAccountNotary],
@@ -156,13 +161,16 @@ export default {
     )
 
     const submitRequest = async (id, type) => {
+      isDisabled.value = true
       await manageWillRequest(id, type)
       emit('submit')
+      isDisabled.value = false
     }
 
     const isActionsDisabled = item => {
       let isStatusWrong = false
       if (isAccountNotary.value) isStatusWrong = item.isStatusApproved
+      if (isAccountRegistry.value) isStatusWrong = !item.isStatusApproved
       return !item.isManageable || isDisabled.value || isStatusWrong
     }
 
@@ -179,6 +187,12 @@ export default {
 
 <style lang="scss" scoped>
 .will-request-table__dropdown-td { width: 2rem; }
+
+.will-requests-table__recipient {
+  line-height: 1.6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 </style>
 
 <i18n>

@@ -28,6 +28,10 @@ export const actions = {
 export const getters = {
   [vuexTypes.account]: state => state?.account,
 
+  [vuexTypes.accountId]: state => state?.account?.id,
+
+  [vuexTypes.accountEmail]: state => state?.account?.email,
+
   [vuexTypes.isAccountGeneral]: (_, getters) =>
     +getters[vuexTypes.account]?.role === USER_ROLES.general,
 
