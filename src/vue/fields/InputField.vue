@@ -106,7 +106,7 @@ export default {
 
   methods: {
     onInput (event) {
-      const value = this.mask ? event : event.target.value
+      const value = event.target.value
       if (this.modelValue === value) return
       this.$emit('update:modelValue', value)
     },
