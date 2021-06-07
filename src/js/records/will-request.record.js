@@ -14,9 +14,9 @@ export class WillRequestRecord {
       ? new AccountRecord(record.creator)
       : new AccountRecord({})
 
-    this.recipient = record?.recipient
-      ? new AccountRecord(record.recipient)
-      : new AccountRecord({})
+    this.recipients = record?.recipient
+      ? record.recipient.map(i => new AccountRecord(i))
+      : []
   }
 
   get isStatusSubmitted () {

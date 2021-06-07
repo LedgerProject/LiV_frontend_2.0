@@ -48,6 +48,7 @@
             {{ $t('will-requests-link') }}
           </router-link>
           <button
+            v-if="isAccountGeneral"
             v-ripple
             type="button"
             class="app-sidebar__link"
@@ -62,6 +63,7 @@
       </section>
     </aside>
     <modal
+      v-if="isAccountGeneral"
       v-model:is-shown="isModalShown"
       :close-by-click-outside="false"
       width="40"
@@ -79,7 +81,9 @@ import Logo from '@/vue/common/Logo'
 import Modal from '@/vue/common/Modal'
 import WillRequestForm from '@/vue/forms/WillRequestForm'
 
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
+import { vuexTypes } from '@/vuex'
 
 export default {
   name: 'app-sidebar',
@@ -87,13 +91,22 @@ export default {
   components: { Logo, Modal, WillRequestForm },
 
   setup () {
+    const store = useStore()
     const isOpened = ref(false)
     const isModalShown = ref(false)
 
     const closeSidebar = () => { isOpened.value = false }
     const openSidebar = () => { isOpened.value = true }
 
-    return { isOpened, closeSidebar, openSidebar, isModalShown }
+    return {
+      isOpened,
+      closeSidebar,
+      openSidebar,
+      isModalShown,
+      isAccountGeneral: computed(
+        () => store.getters[vuexTypes.isAccountGeneral],
+      ),
+    }
   },
 }
 </script>

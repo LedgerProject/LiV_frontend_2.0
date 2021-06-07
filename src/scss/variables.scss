@@ -172,7 +172,7 @@ $col-no-data-message-text: var(--col-text);
 $col-no-data-message-icon-color: rgba(var(--col-secondary-rgb), 0.4);
 
 // modal
-$col-modal-backdrop-bg: rgba($_black, 0.2);
+$col-modal-backdrop-bg: rgba($_black, 0.6);
 $col-modal-btn-text: var(--col-primary);
 $col-modal-head-text: var(--col-primary);
 $col-modal-btn-color-hover-bg: rgba($col-primary, 0.2);
