@@ -61,6 +61,9 @@
           </button>
         </nav>
       </section>
+      <section class="app-sidebar__footer-section">
+        {{ $config.BUILD_VERSION }}
+      </section>
     </aside>
     <modal
       v-if="isAccountGeneral"
@@ -281,6 +284,13 @@ export default {
 }
 
 .app-sidebar__link-icon { font-size: 2rem; }
+
+.app-sidebar__footer-section {
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.2rem;
+  color: $col-app-sidebar-build-version;
+}
 </style>
 
 <i18n>

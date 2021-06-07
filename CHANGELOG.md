@@ -26,6 +26,7 @@ for further information about branching and tagging conventions.
 - Will Requests list page
 - Will Requests form
 - `FileField` component
+- Build version displaying
 #### Fixed
 - Restoring store from localStorage
 
