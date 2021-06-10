@@ -212,3 +212,9 @@ $col-will-request-form-remove-btn-color-active: darken($col-primary, 10%);
 
 // will request details
 $col-will-request-details-page-title: var(--col-primary);
+
+// sign up form
+$col-sign-up-form-selected-item: $_white;
+$col-sign-up-form-role-selector-bg: rgba(118, 118, 128, 0.12);
+$col-sign-up-form-role-selector-shadow: 0 0.4rem 0.6rem -0.1rem rgba($_black, 0.1),
+                                   0 0.2rem 0.4rem -0.1rem rgba($_black, 0.06);

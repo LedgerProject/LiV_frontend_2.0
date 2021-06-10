@@ -87,6 +87,7 @@
 
       <div class="app__form-actions app__form-actions--right">
         <app-button
+          v-if="isAccountRecordPassed"
           scheme="secondary"
           :title="$t('reset-btn-lbl')"
           @click="resetForm"
@@ -99,7 +100,12 @@
           :title="$t('update-btn-lbl')"
           :disabled="isFormDisabled"
         >
-          {{ $t('update-btn-lbl') }}
+          <template v-if="isAccountRecordPassed">
+            {{ $t('update-btn-lbl') }}
+          </template>
+          <template v-else>
+            {{ $t('sign-up-btn-lbl') }}
+          </template>
         </app-button>
       </div>
     </form>
@@ -144,6 +150,8 @@ import Modal from '@/vue/common/Modal'
 import { InputField } from '@/vue/fields'
 import { MAX_FIELD_LENGTH, MIN_FIELD_LENGTH } from '@/js/const/field-length.const'
 import { useForm, useValidators } from '@/vue/composables'
+import { useStore } from 'vuex'
+import { vuexTypes } from '@/vuex'
 import { ErrorHandler } from '@/js/helpers/error-handler'
 import { AccountRecord } from '@/js/records/account.record'
 import { api } from '@/api'
@@ -156,17 +164,25 @@ export default {
 
   components: { InputField, Modal },
 
-  props: { accountRecord: { type: AccountRecord, default: () => ({}) } },
+  props: {
+    accountRecord: {
+      type: AccountRecord, default: () => new AccountRecord({}),
+    },
+  },
 
   emits: ['submit'],
 
   setup (props, { emit }) {
+    const store = useStore()
     const isLeaveRouteModalShown = ref(false)
 
     const leaveRouteModalActions = reactive({
       leaveRoute: () => {},
       stayRoute: () => {},
     })
+
+    const isAccountRecordPassed = computed(() => props.accountRecord.id)
+    const accountEmail = computed(() => store.getters[vuexTypes.accountEmail])
 
     const isFormChanged = computed(() =>
       form.firstName.value !== props.accountRecord.firstName ||
@@ -252,7 +268,7 @@ export default {
     const collectForm = () => {
       const fd = new FormData()
 
-      fd.append('email', props.accountRecord.email)
+      fd.append('email', accountEmail.value)
       fd.append('first_name', form.firstName.value)
       fd.append('second_name', form.secondName.value)
       fd.append('last_name', form.lastName.value)
@@ -269,7 +285,9 @@ export default {
         await api.post('/users/addKYC', collectForm(), {
           headers: { 'content-type': 'multipart/form-data' },
         })
-        Bus.success('notifications.update-kyc-success')
+        if (isAccountRecordPassed.value) {
+          Bus.success('notifications.update-kyc-success')
+        }
         emit('submit')
       } catch (e) {
         ErrorHandler.process(e)
@@ -296,7 +314,7 @@ export default {
     }
 
     onBeforeRouteLeave(async (to, from, next) => {
-      if (isFormChanged.value) {
+      if (isFormChanged.value && isAccountRecordPassed.value) {
         try {
           await showLeaveRouteModal()
           next()
@@ -316,6 +334,7 @@ export default {
       resetForm,
       isLeaveRouteModalShown,
       leaveRouteModalActions,
+      isAccountRecordPassed,
     }
   },
 }
@@ -336,6 +355,7 @@ export default {
     "passport-number-lbl": "Passport Number",
     "reset-btn-lbl": "Reset",
     "update-btn-lbl": "Update profile",
+    "sign-up-btn-lbl": "Submit",
     "cancel-update-profile-btn-lbl": "Cancel",
     "leave-btn-lbl": "Leave",
     "leave-page-modal-heading": "Profile changed",

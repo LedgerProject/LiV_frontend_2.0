@@ -33,7 +33,8 @@
   "errors": {
     "default": "Something bad happened. Please try again later or contact the system owner.",
     "network": "Network error: { msg }",
-    "wrong-credentials": "Wrong email or password"
+    "wrong-credentials": "Wrong email or password",
+    "user-exist": "User with such credentials already exist"
   },
   "validation": {
     "field-error_required": "Please fill out this field",
@@ -44,7 +45,8 @@
     "field-error_uniqueValue": "Value is not unique, please try another one",
     "field-error_birthday": "Value is not correct birthday date (YYYY-MM-DD), please try another one",
     "field-error_email": "This field should be a valid email",
-    "field-error_recipientEmail": "Recipient's email cannot be equal to the current one"
+    "field-error_recipientEmail": "Recipient's email cannot be equal to the current one",
+    "field-error_passwordEquals": "Passwords do not match"
   },
   "formats": {
     "dates": {

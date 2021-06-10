@@ -1,6 +1,8 @@
 import AppContent from '@/AppContent'
 import Auth from '@/vue/pages/Auth'
 import Login from '@/vue/pages/Login'
+import SignUpKyc from '@/vue/pages/SignUpKyc'
+import SignUp from '@/vue/pages/SignUp'
 import Profile from '@/vue/pages/Profile'
 import WillRequests from '@/vue/pages/WillRequests/WillRequests'
 import WillRequestsList from '@/vue/pages/WillRequests/WillRequestsList'
@@ -27,6 +29,18 @@ const routes = [
         path: '/sign-in',
         name: vueRoutes.login.name,
         component: Login,
+        beforeEnter: authPageGuard,
+      },
+      {
+        path: '/sign-up',
+        name: vueRoutes.signUp.name,
+        component: SignUp,
+        beforeEnter: authPageGuard,
+      },
+      {
+        path: '/sign-up-kyc',
+        name: vueRoutes.signUpKyc.name,
+        component: SignUpKyc,
         beforeEnter: authPageGuard,
       },
     ],
@@ -88,12 +102,21 @@ router.afterEach((to, from) => { NProgress.done() })
 
 function authPageGuard (to, from, next) {
   const isLoggedIn = store.getters[vuexTypes.isLoggedIn]
-  isLoggedIn ? next(vueRoutes.app) : next()
+  const isKycExist = store.getters[vuexTypes.isKycExist]
+
+  if (to.name === vueRoutes.signUpKyc.name) {
+    isLoggedIn && !isKycExist ? next() : next(vueRoutes.signUp)
+  } else if (to.name === vueRoutes.signUp.name) {
+    isLoggedIn && !isKycExist ? next(vueRoutes.signUpKyc) : next()
+  } else {
+    isLoggedIn && isKycExist ? next(vueRoutes.app) : next()
+  }
 }
 
 function inAppRouteGuard (to, from, next) {
   const isLoggedIn = store.getters[vuexTypes.isLoggedIn]
-  if (isLoggedIn) {
+  const isKycExist = store.getters[vuexTypes.isKycExist]
+  if (isLoggedIn && isKycExist) {
     next()
   } else {
     next(vueRoutes.login)
@@ -101,3 +124,4 @@ function inAppRouteGuard (to, from, next) {
 }
 
 export default router
+export { vueRoutes }

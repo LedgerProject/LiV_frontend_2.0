@@ -9,6 +9,7 @@ export const MAX_FIELD_LENGTH = Object.freeze({
 
 export const MIN_FIELD_LENGTH = Object.freeze({
   email: 3,
+  password: 6,
   name: 3,
   address: 5,
   passportId: 3,

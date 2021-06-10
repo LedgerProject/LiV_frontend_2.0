@@ -14,6 +14,7 @@ export function useField (field) {
     isValid.value = true
     setFieldErrorMessage()
     Object.keys(field.validators ?? {}).forEach(key => {
+      if (!field.validators[key]) return
       const validatorErrorMessage = field.validators[key](val)
 
       if (validatorErrorMessage) {
