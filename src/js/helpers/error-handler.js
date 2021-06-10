@@ -17,11 +17,16 @@ export class ErrorHandler {
   }
 
   static mapError (error) {
-    const errorData = error?.response?.status
+    const errorStatus = error?.response?.status
 
-    return errorData === 403
-      ? new errors.WrongCredentialsError(error)
-      : error
+    switch (errorStatus) {
+      case 403:
+        return new errors.WrongCredentialsError(error)
+      case 409:
+        return new errors.UserExistsError(error)
+      default:
+        return error
+    }
   }
 
   static processWithoutFeedback (error, errorTrackerConfig = {}) {
@@ -39,6 +44,9 @@ export class ErrorHandler {
         break
       case errors.WrongCredentialsError:
         translationId = 'errors.wrong-credentials'
+        break
+      case errors.UserExistsError:
+        translationId = 'errors.user-exist'
         break
       default:
         translationId = 'errors.default'

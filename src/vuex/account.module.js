@@ -42,7 +42,7 @@ export const getters = {
     +getters[vuexTypes.account]?.role === USER_ROLES.registry,
 
   [vuexTypes.isKycExist]: (_, getters) =>
-    getters[vuexTypes.account]?.isKycExist,
+    !!getters[vuexTypes.account]?.isKycExist,
 }
 
 export default {

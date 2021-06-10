@@ -41,3 +41,17 @@
 }
 
 .auth-page__submit-button { max-width: 11rem; }
+
+.auth-page__link {
+  text-align: center;
+  margin-top: 2rem;
+  text-decoration: underline 0.2rem rgba(0, 0, 0, 0);
+  font-weight: 500;
+  color: var(--col-text-secondary);
+  transition: color 0.2s ease-in-out, text-decoration-color 0.2s;
+
+  &:hover { 
+    text-decoration-color: var(--col-primary);
+    color: var(--col-primary);
+  }
+}

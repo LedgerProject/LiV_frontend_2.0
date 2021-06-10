@@ -1,7 +1,7 @@
 {
   "name": "web-client-liv",
   "description": "Project LiV web client",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "husky": {
     "hooks": {

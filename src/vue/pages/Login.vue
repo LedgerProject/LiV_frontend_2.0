@@ -11,6 +11,14 @@
         class="auth-page__form"
         @submit="$router.push($routes.willRequests)"
       />
+      <router-link
+        class="auth-page__link"
+        :to="$routes.signUp"
+        :title="$t('sign-up-url')"
+        :aria-label="$t('sign-up-url')"
+      >
+        {{ $t('sign-up-url') }}
+      </router-link>
     </div>
   </div>
 </template>
@@ -33,7 +41,8 @@ export default {
 {
   "en": {
     "sign-in": "Welcome",
-    "sign-in-subtitle": "Sign in to your account"
+    "sign-in-subtitle": "Sign in to your account",
+    "sign-up-url": "I'm notary/registry"
   }
 }
 </i18n>
