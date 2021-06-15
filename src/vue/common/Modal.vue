@@ -18,6 +18,7 @@
             type="button"
             class="modal__close-btn"
             @click.stop="closeSelf"
+            :disabled="disabled"
           >
             <i class="modal__close-icon mdi mdi-close" />
           </button>
@@ -55,6 +56,8 @@ export default {
   props: {
     isShown: { type: Boolean, default: false },
 
+    disabled: { type: Boolean, default: false },
+
     closeByClickOutside: { type: Boolean, default: true },
 
     width: { type: [String, Number], default: 55 },
@@ -70,6 +73,7 @@ export default {
 
   methods: {
     closeSelf () {
+      if (this.disabled) return
       this.$emit('update:isShown', false)
       this.$emit('close')
     },
@@ -104,6 +108,9 @@ $modal-close-btn-size: 3rem;
   bottom: 0;
   right: 0;
   background-color: $col-modal-backdrop-bg;
+
+  &[disabled] { cursor: not-allowed; }
+  &:not([disabled]):hover { cursor: pointer; }
 }
 
 .modal__head {
@@ -182,6 +189,11 @@ $modal-close-btn-size: 3rem;
   height: $modal-close-btn-size;
   min-width: $modal-close-btn-size;
 
+  &[disabled] {
+    cursor: not-allowed;
+    filter: grayscale(100%);
+  }
+
   &:active {
     & > .modal__close-icon {
       color: $col-modal-btn-color-active;
@@ -195,10 +207,10 @@ $modal-close-btn-size: 3rem;
   }
 }
 
+/* stylelint-disable */
 .modal-transition-enter-active {
   animation-duration: 0.2s;
 
-  /* stylelint-disable selector-nested-pattern */
   & > .modal__backdrop {
     animation: modal-backdrop-keyframes 0.2s ease-in-out;
   }
@@ -206,13 +218,11 @@ $modal-close-btn-size: 3rem;
   & > .modal__pane {
     animation: modal-pane-keyframes 0.2s ease-in-out;
   }
-  /* stylelint-enable selector-nested-pattern */
 }
 
 .modal-transition-leave-active {
   animation-duration: 0.13s;
 
-  /* stylelint-disable selector-nested-pattern */
   & > .modal__backdrop {
     animation: modal-backdrop-keyframes 0.2s ease-in-out reverse;
   }
@@ -220,8 +230,8 @@ $modal-close-btn-size: 3rem;
   & > .modal__pane {
     animation: modal-pane-keyframes 0.2s ease-in-out reverse;
   }
-  /* stylelint-enable selector-nested-pattern */
 }
+/* stylelint-enable */
 
 @keyframes modal-backdrop-keyframes {
   from { opacity: 0; }

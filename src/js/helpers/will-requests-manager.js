@@ -25,6 +25,10 @@ const approveWillRequest = async willRequestId => {
   ])
 }
 
+const deleteWillRequest = async willRequestId => {
+  await api.delete(`/will-requests/delete/${willRequestId}`)
+}
+
 const executeOperationRequest = async (id, type) => {
   switch (type) {
     case WILL_REQUEST_OPERATIONS.approve:
@@ -39,6 +43,9 @@ const executeOperationRequest = async (id, type) => {
     case WILL_REQUEST_OPERATIONS.release:
       await releaseWillRequest(id)
       break
+    case WILL_REQUEST_OPERATIONS.delete:
+      await deleteWillRequest(id)
+      break
   }
 }
 
@@ -47,6 +54,7 @@ export const manageWillRequest = async (id, type) => {
   try {
     await executeOperationRequest(id, type)
     Bus.success(`notifications.request-${type}-success`)
+    Bus.emit(Bus.eventList.willRequestManaged)
   } catch (e) {
     ErrorHandler.process(e)
   }

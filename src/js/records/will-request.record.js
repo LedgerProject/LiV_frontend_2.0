@@ -31,6 +31,10 @@ export class WillRequestRecord {
     return +this.statusId === WILL_REQUEST_STATES.approved
   }
 
+  get isStatusDeleted () {
+    return +this.statusId === WILL_REQUEST_STATES.deleted
+  }
+
   get isManageable () {
     return this.isStatusSubmitted ||
       this.isStatusNotified ||

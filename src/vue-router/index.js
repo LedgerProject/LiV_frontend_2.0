@@ -115,8 +115,7 @@ function authPageGuard (to, from, next) {
 
 function inAppRouteGuard (to, from, next) {
   const isLoggedIn = store.getters[vuexTypes.isLoggedIn]
-  const isKycExist = store.getters[vuexTypes.isKycExist]
-  if (isLoggedIn && isKycExist) {
+  if (isLoggedIn) {
     next()
   } else {
     next(vueRoutes.login)

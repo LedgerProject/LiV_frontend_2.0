@@ -63,13 +63,22 @@
             </template>
           </template>
           <app-button
-            v-if="request.isStatusApproved && isAccountRegistry"
+            v-else-if="request.isStatusApproved && isAccountRegistry"
             icon="mdi-checkbox-multiple-marked-circle"
             :title="$t('notify-btn')"
             :disabled="isDisabled"
             @click="$emit('manage-request', WILL_REQUEST_OPERATIONS.notify)"
           >
             {{ $t('notify-btn') }}
+          </app-button>
+          <app-button
+            v-if="isAccountGeneral"
+            icon="mdi-delete-circle"
+            :title="$t('delete-btn')"
+            :disabled="isDisabled"
+            @click="$emit('manage-request', WILL_REQUEST_OPERATIONS.delete)"
+          >
+            {{ $t('delete-btn') }}
           </app-button>
         </template>
       </div>
@@ -121,12 +130,20 @@ export default {
     const isAccountRegistry = computed(
       () => store.getters[vuexTypes.isAccountRegistry],
     )
+    const isAccountGeneral = computed(
+      () => store.getters[vuexTypes.isAccountGeneral],
+    )
+
     const isActionsShown = computed(() => {
       let isStatusWrong = false
       const request = props.request
+
       if (isAccountNotary.value) isStatusWrong = request.isStatusApproved
       if (isAccountRegistry.value) isStatusWrong = !request.isStatusApproved
-      return !(!request.isManageable || props.isDisabled || isStatusWrong)
+
+      return isAccountGeneral.value
+        ? !(props.isDisabled || request.isStatusDeleted)
+        : !(!request.isManageable || props.isDisabled || isStatusWrong)
     })
 
     return {
@@ -134,6 +151,7 @@ export default {
       isActionsShown,
       isAccountNotary,
       isAccountRegistry,
+      isAccountGeneral,
     }
   },
 }
@@ -189,7 +207,8 @@ export default {
     "reject-btn": "Reject",
     "approve-btn": "Approve",
     "release-btn": "Release",
-    "notify-btn": "Notify"
+    "notify-btn": "Notify",
+    "delete-btn": "Delete"
   }
 }
 </i18n>

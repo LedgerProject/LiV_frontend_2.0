@@ -52,6 +52,7 @@ import { ErrorHandler } from '@/js/helpers/error-handler'
 import { WillRequestRecord } from '@/js/records/will-request.record'
 import { manageWillRequest } from '@/js/helpers/will-requests-manager'
 import { Bus } from '@/js/helpers/event-bus'
+import { WILL_REQUEST_OPERATIONS } from '@/js/const/will-request-operations.const'
 
 export default {
   name: 'will-requests-details',
@@ -63,7 +64,7 @@ export default {
     WillRequestsDetailsTable,
   },
 
-  setup () {
+  setup (_, { emit }) {
     const route = useRoute()
     const willRequestId = route?.params?.id
     const isLoading = ref(false)
@@ -71,7 +72,7 @@ export default {
     const willRequest = ref(null)
     const isDisabled = ref(false)
 
-    Bus.on(Bus.eventList.createWillRequest, () => loadWillRequest())
+    Bus.on(Bus.eventList.willRequestManaged, () => loadWillRequest())
 
     const loadWillRequest = async () => {
       isLoading.value = true
@@ -87,10 +88,13 @@ export default {
     }
 
     const manageRequest = async type => {
-      isDisabled.value = true
-      await manageWillRequest(willRequestId, type)
-      await loadWillRequest()
-      isDisabled.value = false
+      if (type === WILL_REQUEST_OPERATIONS.delete) {
+        emit('delete-will-request', { id: willRequestId, type })
+      } else {
+        isDisabled.value = true
+        await manageWillRequest(willRequestId, type)
+        isDisabled.value = false
+      }
     }
 
     loadWillRequest()

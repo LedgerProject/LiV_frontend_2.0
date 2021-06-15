@@ -17,19 +17,16 @@
         <th>
           {{ $t('table-head-status') }}
         </th>
-        <th v-if="isAccountNotary || isAccountRegistry">
+        <th>
           {{ $t('table-head-action') }}
         </th>
       </thead>
       <tbody>
         <router-link
           v-for="item in willRequests"
-          :to="{
-            ...$routes.willRequestsDetails,
-            params: { id: item.id }
-          }"
-          custom
           v-slot="{ navigate }"
+          custom
+          :to="{ ...$routes.willRequestsDetails, params: { id: item.id } }"
           :key="item.id"
         >
           <tr
@@ -56,10 +53,7 @@
             <td>
               {{ $globalizeWillRequestStatus(item.statusId) }}
             </td>
-            <td
-              v-if="isAccountNotary || isAccountRegistry"
-              class="will-request-table__dropdown-td"
-            >
+            <td class="will-request-table__dropdown-td">
               <dropdown :disabled="isActionsDisabled(item)">
                 <template v-if="isAccountNotary">
                   <template v-if="item.isStatusSubmitted">
@@ -100,7 +94,7 @@
                   </button>
                 </template>
                 <button
-                  v-if="item.isStatusApproved && isAccountRegistry"
+                  v-else-if="item.isStatusApproved && isAccountRegistry"
                   type="button"
                   :title="$t('notify-btn')"
                   :aria-label="$t('notify-btn')"
@@ -110,6 +104,19 @@
                 >
                   {{ $t('notify-btn') }}
                   <i class="mdi mdi-shield-check-outline" />
+                </button>
+                <button
+                  v-if="isAccountGeneral"
+                  type="button"
+                  :title="$t('delete-btn')"
+                  :aria-label="$t('delete-btn')"
+                  @click.prevent="$emit(
+                    'delete-will-request',
+                    { id: item.id, type: WILL_REQUEST_OPERATIONS.delete }
+                  )"
+                >
+                  {{ $t('delete-btn') }}
+                  <i class="mdi mdi-delete-outline" />
                 </button>
               </dropdown>
             </td>
@@ -141,9 +148,9 @@ export default {
     },
   },
 
-  emits: ['submit'],
+  emits: ['delete-will-request'],
 
-  setup (_, { emit }) {
+  setup () {
     const store = useStore()
     const isDisabled = ref(false)
 
@@ -153,11 +160,13 @@ export default {
     const isAccountRegistry = computed(
       () => store.getters[vuexTypes.isAccountRegistry],
     )
+    const isAccountGeneral = computed(
+      () => store.getters[vuexTypes.isAccountGeneral],
+    )
 
     const submitRequest = async (id, type) => {
       isDisabled.value = true
       await manageWillRequest(id, type)
-      emit('submit')
       isDisabled.value = false
     }
 
@@ -165,13 +174,17 @@ export default {
       let isStatusWrong = false
       if (isAccountNotary.value) isStatusWrong = item.isStatusApproved
       if (isAccountRegistry.value) isStatusWrong = !item.isStatusApproved
-      return !item.isManageable || isDisabled.value || isStatusWrong
+
+      return isAccountGeneral.value
+        ? isDisabled.value || item.isStatusDeleted
+        : !item.isManageable || isDisabled.value || isStatusWrong
     }
 
     return {
       WILL_REQUEST_OPERATIONS,
       isAccountNotary,
       isAccountRegistry,
+      isAccountGeneral,
       submitRequest,
       isActionsDisabled,
     }
@@ -200,7 +213,8 @@ export default {
     "reject-btn": "Reject",
     "approve-btn": "Approve",
     "release-btn": "Release",
-    "notify-btn": "Notify"
+    "notify-btn": "Notify",
+    "delete-btn": "Delete"
   }
 }
 </i18n>
