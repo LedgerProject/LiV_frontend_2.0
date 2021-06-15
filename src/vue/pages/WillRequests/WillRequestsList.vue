@@ -51,6 +51,14 @@ export default {
   setup () {
     const store = useStore()
     const accountId = computed(() => store.getters[vuexTypes.accountId])
+    const isAccountNotary =
+      computed(() => store.getters[vuexTypes.isAccountNotary])
+    const isAccountRegistry =
+      computed(() => store.getters[vuexTypes.isAccountRegistry])
+
+    const isNotaryOrRegistry =
+      computed(() => isAccountNotary.value || isAccountRegistry.value)
+
     const isLoading = ref(false)
     const isLoadFailed = ref(false)
     const willRequests = ref([])
@@ -63,7 +71,10 @@ export default {
       try {
         const { data } = await api.get('/will-requests/', {
           headers: { 'Content-Type': 'multipart/form-data' },
-          params: { ownerId: accountId.value },
+          ...(isNotaryOrRegistry.value
+            ? {}
+            : { params: { ownerId: accountId.value } }
+          ),
         })
         willRequests.value = data
         // TODO: remove filter (temporary handler for null items)
