@@ -135,7 +135,7 @@ export default {
           headers: { 'Content-Type': 'multipart/form-data' },
         })
         Bus.success('notifications.request-creation-success')
-        Bus.emit(Bus.eventList.createWillRequest)
+        Bus.emit(Bus.eventList.willRequestManaged)
         emit('submit')
       } catch (e) {
         ErrorHandler.process(e)

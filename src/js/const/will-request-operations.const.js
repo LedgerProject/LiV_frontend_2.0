@@ -3,4 +3,5 @@ export const WILL_REQUEST_OPERATIONS = Object.freeze({
   approve: 'approve',
   notify: 'notify',
   release: 'release',
+  delete: 'delete',
 })
