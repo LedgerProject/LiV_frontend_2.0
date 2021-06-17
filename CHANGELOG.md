@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2021-06-17
+#### Removed
+- `responsive-loader` package
+
 ## [0.1.2] - 2021-06-15
 #### Added
 - Ability to general role account to delete will request on Will Requests and
@@ -44,7 +48,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### Initial project release
 - Initiated project with vue cli
 
-[Unreleased]: https://github.com/LedgerProject/LiV_frontend_2.0/compare/0.1.2...main
+[Unreleased]: https://github.com/LedgerProject/LiV_frontend_2.0/compare/0.1.3...main
+[0.1.3]: https://github.com/LedgerProject/LiV_frontend_2.0/compare/0.1.2...0.1.3
 [0.1.2]: https://github.com/LedgerProject/LiV_frontend_2.0/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/LedgerProject/LiV_frontend_2.0/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/LedgerProject/LiV_frontend_2.0/compare/0.1.0-rc.1...0.1.0

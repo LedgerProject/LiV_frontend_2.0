@@ -1,6 +1,5 @@
 const UnusedWebpackPlugin = require('unused-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const sharp = require('responsive-loader/sharp')
 const path = require('path')
 const fs = require('fs')
 const appDirectory = fs.realpathSync(process.cwd())
@@ -114,18 +113,5 @@ module.exports = {
       .test(/^((?!\/node_modules).)*(\.png|\.jpg|\.jpeg)$/)
       .use('url-loader')
       .loader('url-loader')
-      .tap(options => {
-        options.esModule = false
-        const fallback = options.fallback
-        fallback.loader = 'responsive-loader'
-        fallback.options = {
-          ...fallback.options,
-          adapter: sharp,
-          name: 'img/[name]-[hash]-[width].[ext]',
-          sizes: [375, 768, 1200, 1920, 2880, 3840],
-        }
-
-        return options
-      })
   },
 }
