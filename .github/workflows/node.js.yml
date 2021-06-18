@@ -33,4 +33,4 @@ jobs:
               echo ${GITHUB_REF##*/}
               echo "GITHUB_REF=${GITHUB_REF##*/}" > sshenv
               scp sshenv staging:~/.ssh/environment
-              LC_parameter="${GITHUB_REF##*/}" ssh -o SendEnv=LC_parameter staging 'cd liv && ls && git fetch && git checkout $LC_parameter && git pull && sudo apt remove -y cmdtest && sudo apt install -y nodejs && curl -sL https://deb.nodesource.com/setup_10.x | sudo bash && sudo npm install -g yarn && yarn && yarn build'
+              LC_parameter="${GITHUB_REF##*/}" ssh -o SendEnv=LC_parameter staging 'cd liv && ls && git fetch && git checkout $LC_parameter && git pull && sudo apt remove -y nodejs && curl -sL https://deb.nodesource.com/setup_10.x | sudo bash && node -v && sudo npm install -g yarn && yarn && yarn build'
