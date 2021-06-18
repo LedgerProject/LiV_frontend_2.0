@@ -104,6 +104,7 @@ export default {
 @import '~@/scss/variables';
 
 $app-header-button-height: 4rem;
+$z-app-header-dropdown: 2;
 
 .app-header {
   display: flex;
@@ -148,6 +149,7 @@ $app-header-button-height: 4rem;
   border-radius: 0.4rem;
   padding: 1.6rem;
   background-color: $col-app-header-dropdown;
+  z-index: $z-app-header-dropdown;
 }
 
 .app-header__dropdown-button {

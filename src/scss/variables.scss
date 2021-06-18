@@ -106,6 +106,9 @@ $file-field-title-color: rgba($col-primary, 0.6);
 $file-field-drop-bg-color: $_white;
 $file-field-reset-btn-color: rgba($col-primary, 0.6);
 $file-field-reset-btn-hover-color: rgba($col-primary, 0.8);
+$select-field-hover: rgba($col-field-text, 0.1);
+$select-field-hover-background: rgba($col-field-text, 0.05);
+$select-field-selected-background: rgba($col-field-text, 0.1);
 
 // loading error message
 $col-loading-error-message-text: rgba($col-error, 0.8);
@@ -212,6 +215,13 @@ $col-will-request-form-remove-btn-color-active: darken($col-primary, 10%);
 
 // will request details
 $col-will-request-details-page-title: var(--col-primary);
+
+// will requests list
+$col-will-requests-list-filters-background: var(--col-block-bg);
+$col-will-requests-list-filters-shadow: 
+  0 0.3rem 0.1rem -0.2rem rgba($_black, 0.2),
+  0 0.2rem 0.2rem 0 rgba($_black, 0.14),
+  0 0.1rem 0.5rem 0 rgba($_black, 0.12);
 
 // sign up form
 $col-sign-up-form-selected-item: $_white;
