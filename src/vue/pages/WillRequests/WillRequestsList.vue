@@ -12,6 +12,30 @@
       </template>
       <template v-else>
         <template v-if="willRequests.length">
+          <div
+            v-if="isAccountGeneral"
+            class="will-requests-list__filters"
+          >
+            <select-field
+              name="will-requests-list-filter"
+              v-model="filter"
+              @input="loadWillRequestsList"
+              :label="$t('filter-label')"
+            >
+              <option
+                :title="$t('filter-option-owner')"
+                :value="WILL_REQUESTS_LIST_FILTERS.owner"
+              >
+                {{ $t('filter-option-owner') }}
+              </option>
+              <option
+                :title="$t('filter-option-recipient')"
+                :value="WILL_REQUESTS_LIST_FILTERS.recipient"
+              >
+                {{ $t('filter-option-recipient') }}
+              </option>
+            </select-field>
+          </div>
           <will-requests-table
             :will-requests="willRequests"
             @delete-will-request="$emit('delete-will-request', $event)"
@@ -36,28 +60,43 @@ import NoDataMessage from '@/vue/common/NoDataMessage'
 import WillRequestsTable from '@/vue/pages/WillRequests/WillRequestsTable'
 
 import { api } from '@/api'
-import { ref, computed } from 'vue'
+import { toRefs, computed, reactive } from 'vue'
 import { Bus } from '@/js/helpers/event-bus'
 import { ErrorHandler } from '@/js/helpers/error-handler'
 import { WillRequestRecord } from '@/js/records/will-request.record'
 import { useStore } from 'vuex'
 import { vuexTypes } from '@/vuex'
+import { SelectField } from '@/vue/fields'
+
+const WILL_REQUESTS_LIST_FILTERS = { owner: 'owner', recipient: 'recipient' }
 
 export default {
   name: 'will-requests-list',
 
-  components: { Loader, LoadingErrorMessage, NoDataMessage, WillRequestsTable },
+  components: {
+    Loader,
+    LoadingErrorMessage,
+    NoDataMessage,
+    WillRequestsTable,
+    SelectField,
+  },
 
   emits: ['delete-will-request'],
 
   setup () {
-    const isLoading = ref(false)
-    const isLoadFailed = ref(false)
-    const willRequests = ref([])
+    const state = reactive({
+      isLoading: false,
+      isLoadFailed: false,
+      willRequests: [],
+      filter: WILL_REQUESTS_LIST_FILTERS.owner,
+    })
 
     const store = useStore()
 
     const accountId = computed(() => store.getters[vuexTypes.accountId])
+    const isAccountGeneral = computed(
+      () => store.getters[vuexTypes.isAccountGeneral],
+    )
     const isAccountNotary = computed(
       () => store.getters[vuexTypes.isAccountNotary],
     )
@@ -71,46 +110,68 @@ export default {
     Bus.on(Bus.eventList.willRequestManaged, () => loadWillRequestsList())
 
     const loadWillRequestsList = async () => {
-      isLoading.value = true
-      isLoadFailed.value = false
+      state.isLoading = true
+      state.isLoadFailed = false
       try {
+        const generalFilter = {
+          params: {
+            ...(state.filter === WILL_REQUESTS_LIST_FILTERS.owner
+              ? { ownerId: accountId.value }
+              : { recipientId: accountId.value }
+            ),
+          },
+        }
         const { data } = await api.get('/will-requests/', {
           headers: { 'Content-Type': 'multipart/form-data' },
-          ...(isNotaryOrRegistry.value
-            ? {}
-            : { params: { ownerId: accountId.value } }
-          ),
+          ...(isNotaryOrRegistry.value ? {} : generalFilter),
         })
-        willRequests.value = data
+        state.willRequests = data
         // TODO: remove filter (temporary handler for null items)
           .filter(i => i)
           .map(el => new WillRequestRecord(el))
       } catch (e) {
-        isLoadFailed.value = true
+        state.isLoadFailed = true
         ErrorHandler.process(e)
       }
-      isLoading.value = false
+      state.isLoading = false
     }
 
     loadWillRequestsList()
 
     return {
-      isLoading,
-      isLoadFailed,
-      willRequests,
+      ...toRefs(state),
       loadWillRequestsList,
+      WILL_REQUESTS_LIST_FILTERS,
+      isAccountGeneral,
     }
   },
 
 }
 </script>
 
+<style lang="scss" scoped>
+@import '~@/scss/variables';
+
+.will-requests-list__filters {
+  margin-bottom: 1.4rem;
+  max-width: 30rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.4rem;
+  margin-left: auto;
+  background: $col-will-requests-list-filters-background;
+  box-shadow: $col-will-requests-list-filters-shadow;
+}
+</style>
+
 <i18n>
 {
   "en": {
     "loading-message": "Loading will requests list...",
     "no-data-title": "Nothing there...",
-    "no-data-message": "There is no will requests"
+    "no-data-message": "There is no will requests",
+    "filter-option-owner": "Owner",
+    "filter-option-recipient": "Recipient",
+    "filter-label": "Filter by"
   }
 }
 </i18n>

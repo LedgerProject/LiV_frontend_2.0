@@ -47,6 +47,20 @@
             <i class="mdi mdi-format-list-checkbox app-sidebar__link-icon"/>
             {{ $t('will-requests-link') }}
           </router-link>
+          <a
+            v-ripple
+            class="app-sidebar__link"
+            :href="$config.BLOCKCHAIN_EXPLORER_URL"
+            target="_blank"
+            rel="noopener"
+            :title="$t('blockchain-explorer-link')"
+            :aria-label="$t('blockchain-explorer-link')"
+            @click="closeSidebar"
+          >
+            <i class="mdi mdi-alpha-b-box-outline app-sidebar__link-icon"/>
+            {{ $t('blockchain-explorer-link') }}
+            <i class="mdi mdi-open-in-new app-sidebar__link-icon--secondary"/>
+          </a>
           <button
             v-if="isAccountGeneral"
             v-ripple
@@ -283,7 +297,16 @@ export default {
   }
 }
 
-.app-sidebar__link-icon { font-size: 2rem; }
+.app-sidebar__link-icon {
+  font-size: 2rem;
+
+  &--secondary {
+    margin-left: 3rem;
+    margin-top: 0.1rem;
+    color: $col-app-sidebar-secondary-icon;
+    opacity: 0.6;
+  }
+}
 
 .app-sidebar__footer-section {
   text-align: center;
@@ -297,6 +320,7 @@ export default {
 {
   "en": {
     "will-requests-link": "Will Requests",
+    "blockchain-explorer-link": "Blockchain Explorer",
     "burger-menu": "Burger menu",
     "create-will-request-link": "Create Will Request",
     "create-will-request-heading": "Create Will Request"
