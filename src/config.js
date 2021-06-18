@@ -7,7 +7,7 @@ export const CONFIG = Object.freeze({
 
   SIGN_UP_REDIRECT_URL: 'http://livpoc.com/index_encuesta.php',
 
-  BLOCKCHAIN_EXPLORER_URL: 'http://3.66.121.156/blocks',
+  BLOCKCHAIN_EXPLORER_URL: 'http://18.193.124.218/blocks',
 
   BUILD_VERSION: packageJson.version,
 })
