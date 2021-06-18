@@ -1,14 +1,36 @@
-name: CI
-on: [push]
+name: Frontend CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
 jobs:
-  build:
-    name: Test
+  setup:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: install # will run `yarn install` command
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: build # will run `yarn build` command
+      - name: Configure SSH
+        run: |
+            mkdir -p ~/.ssh/
+            echo "$SSH_KEY" > ~/.ssh/staging.key
+            chmod 600 ~/.ssh/staging.key
+            cat >>~/.ssh/config <<END
+            Host staging
+              HostName $SSH_HOST
+              User $SSH_USER
+              IdentityFile ~/.ssh/staging.key
+              StrictHostKeyChecking no
+            END
+        env:
+            SSH_USER: ${{ secrets.SSH_USER }}
+            SSH_KEY: ${{ secrets.PRIVATE_KEY}}
+            SSH_HOST: ${{ secrets.HOST }}
+      - name: SSH deploy  $GITHUB_REF branch version
+        run: |
+              echo ${GITHUB_REF##*/}
+              echo "GITHUB_REF=${GITHUB_REF##*/}" > sshenv
+              scp sshenv staging:~/.ssh/environment
+              LC_parameter="${GITHUB_REF##*/}" ssh -o SendEnv=LC_parameter staging 'cd liv && ls && git fetch && git checkout $LC_parameter && git pull && sudo apt remove -y nodejs && curl -sL https://deb.nodesource.com/setup_10.x | sudo bash && sudo apt-get install -y nodejs && node -v && sudo npm install -g yarn && yarn && yarn build'
