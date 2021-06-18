@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Will request filter by owner and recipient for general account role
 - `SelectField` component
 - `custom-select` package
+- Blockchain Explorer external link
 
 ## [0.1.3] - 2021-06-17
 #### Removed
